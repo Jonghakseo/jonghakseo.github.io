@@ -21,8 +21,6 @@ module.exports = {
     //     dest: path.resolve(process.cwd(), "src", "schema.graphql"),
     //   },
     // },
-    // "gatsby-plugin-styled-components",
-    // "gatsby-plugin-image",
     // {
     //   resolve: `gatsby-plugin-graphql-codegen`,
     //   options: {
@@ -30,6 +28,8 @@ module.exports = {
     //     additionalSchemas: ["./src/schema.graphql"],
     //   },
     // },
+    "gatsby-plugin-styled-components",
+    "gatsby-plugin-image",
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
