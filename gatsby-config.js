@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix:'jonghakseo.github.io',
   siteMetadata: {
     siteUrl: "https://jonghakseo.github.io",
     title: "jonghakseo.github.io",
