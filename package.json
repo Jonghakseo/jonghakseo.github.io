@@ -1,7 +1,7 @@
 {
   "name": "jonghakseo.github.io",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "description": "jonghakseo.github.io",
   "author": "jonghakseo",
   "keywords": [
