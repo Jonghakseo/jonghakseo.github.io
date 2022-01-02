@@ -15,12 +15,12 @@ module.exports = {
         allExtensions: true, // defaults to false
       },
     },
-    // {
-    //   resolve: "gatsby-plugin-extract-schema",
-    //   options: {
-    //     dest: path.resolve(process.cwd(), "src", "schema.graphql"),
-    //   },
-    // },
+    {
+      resolve: "gatsby-plugin-extract-schema",
+      options: {
+        dest: path.resolve(process.cwd(), "src", "schema.graphql"),
+      },
+    },
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
     {
