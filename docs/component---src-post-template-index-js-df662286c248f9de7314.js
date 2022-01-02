@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkjonghakseo_github_io=self.webpackChunkjonghakseo_github_io||[]).push([[404],{5040:function(e,t,n){n.r(t),n.d(t,{default:function(){return a}});var r=n(7294);function a(e){var t=e.data.markdownRemark;return r.createElement("article",null,r.createElement("div",null,r.createElement("h1",null,t.frontmatter.title),r.createElement("div",{dangerouslySetInnerHTML:{__html:t.html}})))}}}]);
+//# sourceMappingURL=component---src-post-template-index-js-df662286c248f9de7314.js.map
