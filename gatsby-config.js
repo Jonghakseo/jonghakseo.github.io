@@ -44,7 +44,26 @@ module.exports = {
         icon: `${__dirname}/images/icon.png`,
       },
     },
-    "gatsby-transformer-remark",
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-highlight-code`,
+            options: {
+              terminal: "carbon",
+              theme: "dracula",
+            },
+          },
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 590,
+            },
+          },
+        ],
+      },
+    },
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
@@ -66,9 +85,16 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
+        name: "post-img",
+        path: `${__dirname}/post-img`,
+      },
+      __key: "post-img",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
         name: "markdown-pages",
         path: `${__dirname}/post-mds`,
-        ignore: [`images`],
       },
     },
   ],

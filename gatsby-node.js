@@ -34,7 +34,7 @@ exports.createPages = async ({ graphql, actions }) => {
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: `post${node.fields.slug}`,
-      component: path.resolve(`${__dirname}/src/postTemplate/index.js`),
+      component: path.resolve(`${__dirname}/src/postTemplate/index.tsx`),
       context: {
         slug: node.fields.slug,
       },
@@ -45,14 +45,14 @@ exports.createPages = async ({ graphql, actions }) => {
 exports.onPreInit = () => {
   if (process.argv[2] === "build") {
     try {
-      fs.rmSync(path.join(__dirname, "static/img"), { recursive: true });
-      fs.cpSync(
-        path.join(__dirname, "post-mds/img"),
-        path.join(__dirname, "static/img"),
-        {
-          recursive: true,
-        }
-      );
+      // fs.rmSync(path.join(__dirname, "static/post/img"), { recursive: true });
+      // fs.cpSync(
+      //   path.join(__dirname, "post-mds/img"),
+      //   path.join(__dirname, "static/post/img"),
+      //   {
+      //     recursive: true,
+      //   }
+      // );
       fs.rmSync(path.join(__dirname, "docs"), { recursive: true });
     } catch (e) {
       console.error(e);

@@ -29,5 +29,7 @@
     "src/gatsby-graphql.ts",
     "src/postTemplate/index.js"
   ],
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/restrict-template-expressions": "off"
+  }
 }
