@@ -15,21 +15,21 @@ module.exports = {
         allExtensions: true, // defaults to false
       },
     },
-    {
-      resolve: "gatsby-plugin-extract-schema",
-      options: {
-        dest: path.resolve(process.cwd(), "src", "schema.graphql"),
-      },
-    },
-    "gatsby-plugin-styled-components",
-    "gatsby-plugin-image",
-    {
-      resolve: `gatsby-plugin-graphql-codegen`,
-      options: {
-        fileName: `./src/gatsby-graphql.ts`,
-        additionalSchemas: ["./src/schema.graphql"],
-      },
-    },
+    // {
+    //   resolve: "gatsby-plugin-extract-schema",
+    //   options: {
+    //     dest: path.resolve(process.cwd(), "src", "schema.graphql"),
+    //   },
+    // },
+    // "gatsby-plugin-styled-components",
+    // "gatsby-plugin-image",
+    // {
+    //   resolve: `gatsby-plugin-graphql-codegen`,
+    //   options: {
+    //     fileName: `./src/gatsby-graphql.ts`,
+    //     additionalSchemas: ["./src/schema.graphql"],
+    //   },
+    // },
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
