@@ -7,6 +7,12 @@ module.exports = {
     title: "jonghakseo.github.io",
   },
   plugins: [
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp",
+    "gatsby-plugin-react-helmet",
+    "gatsby-plugin-sitemap",
+    "gatsby-plugin-styled-components",
+    "gatsby-plugin-image",
     {
       resolve: `gatsby-plugin-typescript`,
       options: {
@@ -15,29 +21,12 @@ module.exports = {
         allExtensions: true, // defaults to false
       },
     },
-    // {
-    //   resolve: "gatsby-plugin-extract-schema",
-    //   options: {
-    //     dest: path.resolve(process.cwd(), "src", "schema.graphql"),
-    //   },
-    // },
-    // {
-    //   resolve: `gatsby-plugin-graphql-codegen`,
-    //   options: {
-    //     fileName: `./src/gatsby-graphql.ts`,
-    //     additionalSchemas: ["./src/schema.graphql"],
-    //   },
-    // },
-    "gatsby-plugin-styled-components",
-    "gatsby-plugin-image",
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
         trackingId: "G-08GBQWYJXH",
       },
     },
-    "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
@@ -64,8 +53,6 @@ module.exports = {
         ],
       },
     },
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -78,7 +65,7 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "pages",
-        path: "./src/pages/",
+        path: `${__dirname}/src/pages`,
       },
       __key: "pages",
     },
@@ -97,5 +84,18 @@ module.exports = {
         path: `${__dirname}/post-mds`,
       },
     },
+    // {
+    //   resolve: "gatsby-plugin-extract-schema",
+    //   options: {
+    //     dest: path.resolve(process.cwd(), "src", "schema.graphql"),
+    //   },
+    // },
+    // {
+    //   resolve: `gatsby-plugin-graphql-codegen`,
+    //   options: {
+    //     fileName: `./src/gatsby-graphql.ts`,
+    //     additionalSchemas: ["./src/schema.graphql"],
+    //   },
+    // },
   ],
 };
