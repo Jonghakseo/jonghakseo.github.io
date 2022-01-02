@@ -1,5 +1,0 @@
-{
-    "componentChunkName": "component---src-post-template-index-js",
-    "path": "/post/이미지/",
-    "result": {"data":{"markdownRemark":{"html":"<p><img src=\"img/log.png\" alt=\"logo\"></p>","frontmatter":{"title":"이미지"}}},"pageContext":{"slug":"/이미지/"}},
-    "staticQueryHashes": []}
