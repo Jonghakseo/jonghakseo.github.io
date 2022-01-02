@@ -1,6 +1,6 @@
 name: build gatsby
 on:
-  push:
+  status:
     branches:
       - main
 
