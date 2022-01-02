@@ -45,6 +45,14 @@ exports.createPages = async ({ graphql, actions }) => {
 exports.onPreInit = () => {
   if (process.argv[2] === "build") {
     try {
+      fs.rmSync(path.join(__dirname, "static/img"), { recursive: true });
+      fs.cpSync(
+        path.join(__dirname, "post-mds/img"),
+        path.join(__dirname, "static/img"),
+        {
+          recursive: true,
+        }
+      );
       fs.rmSync(path.join(__dirname, "docs"), { recursive: true });
     } catch (e) {
       console.error(e);

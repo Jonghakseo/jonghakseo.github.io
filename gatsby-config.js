@@ -68,6 +68,7 @@ module.exports = {
       options: {
         name: "markdown-pages",
         path: `${__dirname}/post-mds`,
+        ignore: [`images`],
       },
     },
   ],
