@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "gatsby develop",
     "start": "gatsby develop",
-    "build": "gatsby build --prefix-path",
+    "build": "gatsby build --prefix-paths",
     "git": "git add . && git commit -m 'update' && git push",
     "deploy": "yarn build && yarn git",
     "serve": "gatsby serve",
