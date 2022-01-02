@@ -1,7 +1,7 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es6": true
   },
   "extends": [
     "eslint:recommended",
@@ -26,8 +26,8 @@
     "node_modules/",
     "gatsby-node.js",
     "gatsby-config.js",
-    "src/graphql-types.ts",
-    "src/blogTemplate/index.js"
+    "src/gatsby-graphql.ts",
+    "src/postTemplate/index.js"
   ],
   "rules": {}
 }

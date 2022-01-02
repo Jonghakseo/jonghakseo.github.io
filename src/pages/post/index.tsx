@@ -1,5 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
+import { GetAllPostsQuery } from "../../gatsby-graphql";
 
 const GET_ALL_POST_QUERY = graphql`
   query GetAllPosts {
@@ -21,7 +22,8 @@ const GET_ALL_POST_QUERY = graphql`
 `;
 
 export default function PostList() {
-  const data = useStaticQuery(GET_ALL_POST_QUERY);
-  console.log(data);
-  return <div />;
+  const { allMarkdownRemark } =
+    useStaticQuery<GetAllPostsQuery>(GET_ALL_POST_QUERY);
+  console.log(allMarkdownRemark);
+  return <div>hi</div>;
 }
