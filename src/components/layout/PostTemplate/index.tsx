@@ -1,21 +1,26 @@
 import React from "react";
-import { graphql } from "gatsby";
-import { Query } from "../gatsby-graphql";
+import { graphql, PageProps } from "gatsby";
+import { Query } from "src/gatsby-graphql";
 import { defineCustomElements as deckDeckGoHighlightElement } from "@deckdeckgo/highlight-code/dist/loader";
+import HitCounter from "components/post/HitCounter";
+import NotFoundPage from "pages/404";
 void deckDeckGoHighlightElement();
 
-export default function PostTemplate({ data }: { data: Query }) {
-  const post = data.markdownRemark;
-  if (!post) return <div>404</div>;
-  const { frontmatter } = post;
+interface TemplateProps extends PageProps {
+  data: Query;
+}
 
-  const hitsCounter = `<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fjonghakseo.github.io/post/${frontmatter?.title}%2Factions&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>`;
+export default function PostTemplate(props: TemplateProps) {
+  const { data, location } = props;
+  const post = data.markdownRemark;
+  if (!post) return <NotFoundPage />;
+  const { frontmatter } = post;
 
   return (
     <div>
       <div>
         <h1>{frontmatter?.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: hitsCounter }} />
+        <HitCounter href={location.href} />
         <div dangerouslySetInnerHTML={{ __html: `${post?.html}` }} />
       </div>
     </div>

@@ -5,7 +5,7 @@ tags: test
 thumb: img/logo.png
 ---
 
-![logo](../post-img/logo.png)
+![logo](../post-img/gatsby-logo.png)
  
 ```tsx
 export default function PostTemplate({ data }: { data: Query }) {

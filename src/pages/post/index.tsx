@@ -1,6 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
-import { GetAllPostsQuery } from "../../gatsby-graphql";
+import { GetAllPostsQuery } from "src/gatsby-graphql";
 
 const GET_ALL_POST_QUERY = graphql`
   query GetAllPosts {
