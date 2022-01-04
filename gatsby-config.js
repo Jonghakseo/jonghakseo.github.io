@@ -86,12 +86,12 @@ module.exports = {
         path: `${__dirname}/post-mds`,
       },
     },
-    {
-      resolve: "gatsby-plugin-extract-schema",
-      options: {
-        dest: path.resolve(process.cwd(), "src", "schema.graphql"),
-      },
-    },
+    // {
+    //   resolve: "gatsby-plugin-extract-schema",
+    //   options: {
+    //     dest: path.resolve(process.cwd(), "src", "schema.graphql"),
+    //   },
+    // },
     // {
     //   resolve: `gatsby-plugin-graphql-codegen`,
     //   options: {

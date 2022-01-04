@@ -18,7 +18,6 @@ const GET_ALL_POST_QUERY = graphql`
           }
           frontmatter {
             title
-            thumb
             date
             tags
           }
