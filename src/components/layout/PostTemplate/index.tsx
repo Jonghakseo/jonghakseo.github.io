@@ -1,9 +1,9 @@
-import React from "react";
 import { graphql, PageProps } from "gatsby";
 import { Query } from "src/gatsby-graphql";
 import { defineCustomElements as deckDeckGoHighlightElement } from "@deckdeckgo/highlight-code/dist/loader";
 import HitCounter from "components/post/HitCounter";
 import NotFoundPage from "pages/404";
+
 void deckDeckGoHighlightElement();
 
 interface TemplateProps extends PageProps {
@@ -21,6 +21,7 @@ export default function PostTemplate(props: TemplateProps) {
       <div>
         <h1>{frontmatter?.title}</h1>
         <HitCounter href={location.href} />
+        {/* eslint-disable-next-line react/no-danger */}
         <div dangerouslySetInnerHTML={{ __html: `${post?.html}` }} />
       </div>
     </div>

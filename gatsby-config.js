@@ -9,6 +9,7 @@ module.exports = {
   },
   plugins: [
     "gatsby-transformer-sharp",
+    `gatsby-plugin-provide-react`,
     "gatsby-plugin-sharp",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
@@ -85,12 +86,12 @@ module.exports = {
         path: `${__dirname}/post-mds`,
       },
     },
-    // {
-    //   resolve: "gatsby-plugin-extract-schema",
-    //   options: {
-    //     dest: path.resolve(process.cwd(), "src", "schema.graphql"),
-    //   },
-    // },
+    {
+      resolve: "gatsby-plugin-extract-schema",
+      options: {
+        dest: path.resolve(process.cwd(), "src", "schema.graphql"),
+      },
+    },
     // {
     //   resolve: `gatsby-plugin-graphql-codegen`,
     //   options: {
