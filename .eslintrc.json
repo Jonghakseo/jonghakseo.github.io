@@ -51,6 +51,7 @@
     "prettier/prettier": "error",
     "import/no-unresolved": "off",
     "import/extensions": "off",
+    "no-use-before-define": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",

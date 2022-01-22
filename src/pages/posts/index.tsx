@@ -32,7 +32,7 @@ type PostNode = MarkdownRemarkFrontmatter & {
   id: string;
   path: string;
 };
-export default function PostList() {
+export default function PostList(): React.ReactNode {
   const { allMarkdownRemark } =
     useStaticQuery<GetAllPostsQuery>(GET_ALL_POST_QUERY);
 
@@ -41,7 +41,6 @@ export default function PostList() {
     path: `${node.fields?.slug}`,
     ...node.frontmatter,
   }));
-
   return (
     <div>
       {posts.map((post) => {
