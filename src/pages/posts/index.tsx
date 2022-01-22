@@ -4,6 +4,7 @@ import {
   GetAllPostsQuery,
   MarkdownRemarkFrontmatter,
 } from "src/gatsby-graphql";
+import ROUTE_URL from "src/constants/url";
 
 const GET_ALL_POST_QUERY = graphql`
   query GetAllPosts {
@@ -46,7 +47,7 @@ export default function PostList(): React.ReactNode {
       {posts.map((post) => {
         const { id, title, date, path } = post;
         return (
-          <Link key={id} to={`/post${path}`}>
+          <Link key={id} to={`${ROUTE_URL.POST.replace("/[path]", path)}`}>
             <p>
               {title}
               {date}
