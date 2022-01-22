@@ -1,4 +1,3 @@
-import * as React from "react";
 import { CSSProperties } from "react";
 
 // styles
@@ -127,7 +126,7 @@ const links = [
 ];
 
 // markup
-const IndexPage = () => {
+function IndexPage() {
   return (
     <main style={pageStyles}>
       <title>JongHakSeo Page</title>
@@ -180,6 +179,6 @@ const IndexPage = () => {
       />
     </main>
   );
-};
+}
 
 export default IndexPage;

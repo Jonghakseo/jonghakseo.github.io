@@ -5,9 +5,11 @@ module.exports = {
   siteMetadata: {
     siteUrl: "https://jonghakseo.github.io",
     title: "jonghakseo.github.io",
+    description: "Jonghakseo Dev Blog",
   },
   plugins: [
     "gatsby-transformer-sharp",
+    `gatsby-plugin-provide-react`,
     "gatsby-plugin-sharp",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
@@ -16,9 +18,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-typescript`,
       options: {
-        isTSX: true, // defaults to false
-        jsxPragma: `jsx`, // defaults to "React"
-        allExtensions: true, // defaults to false
+        isTSX: true,
+        jsxPragma: `jsx`,
+        allExtensions: true,
       },
     },
     {

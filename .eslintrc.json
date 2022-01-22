@@ -3,8 +3,19 @@
     "browser": true,
     "es6": true
   },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
+    }
+  },
   "extends": [
-    "eslint:recommended",
+    "airbnb",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
@@ -20,16 +31,30 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": ["react", "@typescript-eslint", "graphql"],
+  "plugins": [
+    "import",
+    "react",
+    "@typescript-eslint",
+    "prettier",
+    "graphql"
+  ],
   "ignorePatterns": [
     "dist/",
     "node_modules/",
     "gatsby-node.js",
     "gatsby-config.js",
-    "src/gatsby-graphql.ts",
-    "src/postTemplate/index.js"
+    "src/gatsby-graphql.ts"
   ],
   "rules": {
+    "no-void": "off",
+    "no-undef": "off",
+    "prettier/prettier": "error",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/restrict-template-expressions": "off"
   }
 }
