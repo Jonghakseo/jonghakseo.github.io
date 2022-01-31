@@ -21,6 +21,7 @@ const GET_ALL_POST_QUERY = graphql`
           frontmatter {
             title
             date
+            thumb
             tags
           }
         }
@@ -45,9 +46,17 @@ export default function PostList(): React.ReactNode {
   return (
     <div>
       {posts.map((post) => {
-        const { id, title, date, path } = post;
+        const { id, title, date, path, thumb } = post;
         return (
           <Link key={id} to={`${ROUTE_URL.POST.replace("/[path]", path)}`}>
+            {thumb && (
+              <img
+                width={50}
+                height={50}
+                src={`static/post-thumb/${thumb}`}
+                alt={`${title}`}
+              />
+            )}
             <p>
               {title}
               {date}

@@ -44,13 +44,27 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 };
 
+function postThumbToStatic(mode) {
+  const prefix = mode === "build" ? "docs" : "public";
+  fs.cpSync(
+    path.join(__dirname, "post-thumb"),
+    path.join(__dirname, prefix + "/static/post-thumb"),
+    {
+      recursive: true,
+    }
+  );
+}
+
 exports.onPreInit = () => {
   if (process.argv[2] === "build") {
     try {
       fs.rmSync(path.join(__dirname, "docs"), { recursive: true });
+      postThumbToStatic("build");
     } catch (e) {
       console.error(e);
     }
+  } else {
+    postThumbToStatic("dev");
   }
 };
 
