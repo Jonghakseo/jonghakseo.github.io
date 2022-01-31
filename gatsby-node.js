@@ -59,7 +59,6 @@ exports.onPreInit = () => {
   if (process.argv[2] === "build") {
     try {
       fs.rmSync(path.join(__dirname, "docs"), { recursive: true });
-      postThumbToStatic("build");
     } catch (e) {
       console.error(e);
     }
@@ -70,6 +69,7 @@ exports.onPreInit = () => {
 
 exports.onPostBuild = () => {
   fs.renameSync(path.join(__dirname, "public"), path.join(__dirname, "docs"));
+  postThumbToStatic("build");
 };
 
 // Setup Import Alias
