@@ -1,7 +1,6 @@
 ---
-title: 타이틀
-date: 2022-01-01
-tags: test
-thumb: logo.png
+title: 텍스트
+date: 2022-01-02
+tags: test, 태그2
 ---
 content

@@ -1,8 +1,7 @@
 ---
 title: 이미지
 date: 2022-01-01
-tags: test
-thumb: logo.png
+tags: test, 태그2
 ---
 
 ![logo](../post-img/gatsby-logo.png)

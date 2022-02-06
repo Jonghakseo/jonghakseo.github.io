@@ -3,6 +3,8 @@ import { Query } from "src/gatsby-graphql";
 import { defineCustomElements as deckDeckGoHighlightElement } from "@deckdeckgo/highlight-code/dist/loader";
 import HitCounter from "components/post/HitCounter";
 import NotFoundPage from "pages/404";
+import DefaultLayout from "components/layout/DefaultLayout";
+import styled from "styled-components";
 
 void deckDeckGoHighlightElement();
 
@@ -17,14 +19,14 @@ export default function PostTemplate(props: TemplateProps) {
   const { frontmatter } = post;
 
   return (
-    <div>
-      <div>
+    <DefaultLayout>
+      <PostLayout>
         <h1>{frontmatter?.title}</h1>
         <HitCounter href={location.href} />
         {/* eslint-disable-next-line react/no-danger */}
         <div dangerouslySetInnerHTML={{ __html: `${post?.html}` }} />
-      </div>
-    </div>
+      </PostLayout>
+    </DefaultLayout>
   );
 }
 
@@ -38,3 +40,5 @@ export const query = graphql`
     }
   }
 `;
+
+const PostLayout = styled.div``;

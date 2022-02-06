@@ -5,6 +5,7 @@ import {
   MarkdownRemarkFrontmatter,
 } from "src/gatsby-graphql";
 import ROUTE_URL from "src/constants/url";
+import DefaultLayout from "components/layout/DefaultLayout";
 
 const GET_ALL_POST_QUERY = graphql`
   query GetAllPosts {
@@ -21,7 +22,6 @@ const GET_ALL_POST_QUERY = graphql`
           frontmatter {
             title
             date
-            thumb
             tags
           }
         }
@@ -43,20 +43,13 @@ export default function PostList(): React.ReactNode {
     path: `${node.fields?.slug}`,
     ...node.frontmatter,
   }));
+
   return (
-    <div>
+    <DefaultLayout>
       {posts.map((post) => {
-        const { id, title, date, path, thumb } = post;
+        const { id, title, date, path } = post;
         return (
           <Link key={id} to={`${ROUTE_URL.POST.replace("/[path]", path)}`}>
-            {thumb && (
-              <img
-                width={50}
-                height={50}
-                src={`static/post-thumb/${thumb}`}
-                alt={`${title}`}
-              />
-            )}
             <p>
               {title}
               {date}
@@ -64,6 +57,6 @@ export default function PostList(): React.ReactNode {
           </Link>
         );
       })}
-    </div>
+    </DefaultLayout>
   );
 }

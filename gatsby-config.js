@@ -99,5 +99,13 @@ module.exports = {
     //     additionalSchemas: ["./src/schema.graphql"],
     //   },
     // },
+    {
+      resolve: "gatsby-plugin-root-import",
+      options: {
+        components: path.join(__dirname, "src/components"),
+        src: path.join(__dirname, "src"),
+        pages: path.join(__dirname, "src/pages"),
+      },
+    },
   ],
 };
