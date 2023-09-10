@@ -30,6 +30,13 @@ jobs:
           pnpm-version: 8.6.1  # If `package-manager` is set to `pnpm`, use this specific version. Defaults to `7.x.x`. (optional)
 #          resolve-dep-from-path: false # If the dependency file should be resolved from the root location of your Astro project. Defaults to `true`. (optional)
 
+      - uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
