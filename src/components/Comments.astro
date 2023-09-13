@@ -3,20 +3,28 @@
 ---
 
 <script>
-	let bodyThemeIsDark = document.documentElement.classList.contains("dark");
+	const initialIsDark = document.documentElement.classList.contains("dark");
 	document.addEventListener("theme-change", (e) => {
-		bodyThemeIsDark = e.detail.theme === "dark";
+		loadUtterancesScript(e.detail.theme === "dark");
 	});
+
+	loadUtterancesScript(initialIsDark);
+
+	function loadUtterancesScript(isDark) {
+		document.querySelector(".utterances").remove();
+
+		const script = document.createElement("script");
+		script.src = "https://utteranc.es/client.js";
+		script.async = true;
+		script.setAttribute("repo", "Jonghakseo/jonghakseo.github.io");
+		script.setAttribute("issue-term", "pathname");
+		script.setAttribute("theme", isDark ? "dark-blue" : "boxy-light");
+		script.setAttribute("crossorigin", "anonymous");
+
+		document.body.appendChild(script);
+	}
 </script>
-<script
-	src="https://utteranc.es/client.js"
-	repo="Jonghakseo/jonghakseo.github.io/"
-	issue-term="pathname"
-	theme="github-dark"
-	crossorigin="anonymous"
-	async
-></script>
 
 <div class="utterances">
-	<iframe title="comments" class="utterances-frame"></iframe>
+	<iframe class="utterances-frame"></iframe>
 </div>
