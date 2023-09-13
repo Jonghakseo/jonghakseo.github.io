@@ -1,0 +1,22 @@
+---
+
+---
+
+<script>
+	let bodyThemeIsDark = document.documentElement.classList.contains("dark");
+	document.addEventListener("theme-change", (e) => {
+		bodyThemeIsDark = e.detail.theme === "dark";
+	});
+</script>
+<script
+	src="https://utteranc.es/client.js"
+	repo="Jonghakseo/jonghakseo.github.io/"
+	issue-term="pathname"
+	theme="github-dark"
+	crossorigin="anonymous"
+	async
+></script>
+
+<div class="utterances">
+	<iframe title="comments" class="utterances-frame"></iframe>
+</div>
