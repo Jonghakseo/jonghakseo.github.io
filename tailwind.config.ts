@@ -106,6 +106,12 @@ export default {
 							fontSize: theme("fontSize.sm")[0],
 							fontWeight: "400",
 						},
+						p: {
+							fontSize: theme("fontSize.sm")[0],
+							lineHeight: theme("lineHeight.6"),
+							marginBottom: theme("margin.2"),
+							marginTop: theme("margin.2"),
+						},
 					},
 				},
 			}),
