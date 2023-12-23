@@ -15,7 +15,7 @@ const careers: Array<{ title: string; desc: string; href: string }> = [
 		desc: "Developers with mentorship who do everything the company needs.",
 		href: "https://www.creatrip.com/en",
 	},
-  {
+	{
 		title: "Casemark AI",
 		desc: "SaaS and Chrome extension consultant.",
 		href: "https://www.casemark.ai/",
@@ -32,9 +32,8 @@ const careers: Array<{ title: string; desc: string; href: string }> = [
 	<section>
 		<h1 class="title mb-6">Hello Guys!</h1>
 		<p class="mb-4">
-			Hi, I'm Jonghak Seo, a developer.
-      I do front-end development in Seoul, but I don't limit myself to where I work or what kind of technology I use.
-      During the day, I enjoy solving problems with innovative ideas to make 1+1 make 3, and at night, I spend my time admiring the many developers who contribute to the OSS ecosystem.
+			Hi, I'm Jonghak Seo, a developer. I'm usually based in Seoul, but I'm not limited to where I
+			work.
 		</p>
 		<SocialList />
 	</section>
@@ -63,8 +62,8 @@ const careers: Array<{ title: string; desc: string; href: string }> = [
 							class="cactus-link inline-block"
 						>
 							{title}
-						</a>:
-						<p class="inline-block sm:mt-2">{desc}</p>
+						</a>
+						:<p class="inline-block sm:mt-2">{desc}</p>
 					</li>
 				))
 			}
