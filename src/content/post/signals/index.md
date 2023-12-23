@@ -365,9 +365,9 @@ export function _useSignalsImplementation(
 }
 ```
 
-**useSyncExternalStore**를 사용해서 리렌더링을 트리거하는 것을 볼 수 있습니다. (리액트18에서 추가된 훅으로, 외부 저장소의 상태 변경을 통해 리액트의 렌더링을 트리거 할 수 있도록 지원하는 훅입니다.)
+**useSyncExternalStore**를 사용해서 리렌더링을 트리거하는 것을 볼 수 있습니다. (useSyncExternalStore는 리액트18에서 추가된 훅으로, 외부 저장소의 상태 변경을 통해 리액트의 렌더링을 트리거 할 수 있도록 지원하는 훅입니다.)
 
-우리가 궁금한 부분은 **어떻게 전체 컴포넌트가 아니라 딱 시그널을 사용하는 jsx 노드만 업데이트 할 수 있는 것인가**이기 때문에 해당 부분을 중점적으로 살펴보겠습니다.
+우리의 궁금즘인 **어떻게 전체 컴포넌트가 아니라 딱 시그널을 사용하는 jsx 노드만 업데이트 할 수 있는 것인가**를 해소하기 위해 해당 부분을 중점적으로 살펴보겠습니다.
 
 ```tsx
 
@@ -401,14 +401,11 @@ export function installAutoSignalTracking() {
 
 <p>&nbsp;</p>
 
-앞서 확인했듯이, 시그널과 리액트의 인터페이스 연동은 **installAutoSignalTracking** 이라는 함수를 통해 이뤄집니다.
+앞서 확인했듯 시그널과 리액트의 인터페이스 연동은 **installAutoSignalTracking** 이라는 함수를 통해 이뤄집니다.
 
-해당 함수에서는 두 가지 함수를 호출하는데, 먼저 **installCurrentDispatcherHook**에서는 리액트 렌더링 주기를 파악하여 **useSingal** 훅의 동작을 개입시키는 역할을 해주는 것을 확인했습니다.
+해당 함수에서는 두 가지 함수를 호출합니다. 먼저, **installCurrentDispatcherHook**에서는 리액트 렌더링 주기를 파악하여 **useSingal** 훅의 동작을 개입시키는 역할을 해줍니다.
 
-두 번째는 **installJSXHooks** 라는 함수입니다. 해당 함수는 **wrapJSX** 라는 [데코레이터](https://refactoring.guru/design-patterns/decorator)를 통해 기본 JSX 변환 함수와 **React.createElement**의 기능을 확장하고 있습니다.
-
-이제 **wrapJsx** 함수를 살펴보겠습니다.
-
+두 번째로 호출되는 **installJSXHooks** 함수는 **wrapJSX** 라는 [데코레이터](https://refactoring.guru/design-patterns/decorator)를 통해 기본 JSX 변환 함수와 **React.createElement**의 기능을 확장하고 있습니다.
 
 ```tsx
 
@@ -436,7 +433,7 @@ export function wrapJsx<T>(jsx: T): T {
 
 컴포넌트의 type은 렌더링 대상이 되는 JSX의 타입을 나타냅니다.
 
-함수형 컴포넌트가 아닌 호스트 컴포넌트(react-dom 기준 **div, p** 와 같은 **DOMComponent**)의 경우 타입은 해당 태그의 문자열로 표현됩니다. 함수형 컴포넌트의 경우 컴포넌트 함수 그 자체를 가리킵니다.
+함수형 컴포넌트가 아닌 호스트 컴포넌트(react-dom 기준 **div, p** 와 같은 **DOMComponent**)의 경우 타입은 **해당 태그의 문자열**로 표현되고 함수형 컴포넌트의 경우 컴포넌트 함수 그 자체를 가리킵니다.
 
 ```tsx
 console.log(<p/>); // type: "p"
@@ -445,14 +442,13 @@ console.log(<App/>); // type: function App(){}
 
 ![react-element-type](./react-element-type.png)
 
-따라서 위 코드는 호스트 컴포넌트의 props 중에서, children을 제외하고 signal이 있는 경우 signal의 value를 사용하게끔 변환해주는 코드라는 것을 알 수 있습니다.
+따라서 위 코드는 **호스트 컴포넌트의 children을 제외한 props 중 signal이 있는 경우 signal.value로 대체해주는 코드**라는 것을 알 수 있습니다.
 
-💡 위 코드 구현부를 통해 다음 두 코드가 동일하다는 것을 알 수 있겠네요!
-1. `<input max={maxSignal}/>`
-2. `<input max={maxSignal.value}/>`
+- 💡즉, 위 코드 구현부를 통해 다음 두 코드가 동일한 동작을 한다는 것을 알 수 있습니다!
+  1. `<input max={maxSignal}/>`
+  2. `<input max={maxSignal.value}/>`
 
-둘 중 어느 형태로 사용하던 해당 컴포넌트 전체가 리렌더링이 된다는 것을 짐작할 수 있습니다.
-
+둘 중 어느 형태로 사용하던 결과적으로 signal.value의 접근과 동일하게 취급되기 때문에 위의 사용 사례에서는 해당 컴포넌트 전체가 리렌더링이 된다는 것을 짐작할 수 있습니다.
 
 이제 마법처럼 보였던, **텍스트 노드만 단일 렌더링되어 컴포넌트의 전체 리렌더링이 발생하지 않는 케이스** 의 동작 원리를 살펴볼 차례입니다.
 
@@ -512,15 +508,15 @@ Object.defineProperties(Signal.prototype, {
 </div>
 ```
 
-**이제 모든 비밀이 풀렸습니다!**
+코드를 작성하는 개발자는 JSX 노드에 시그널 값을 직접 넣어주지만, 실제로는 **SingalValue**라는 컴포넌트로 변경되는 셈입니다.
 
-코드를 작성하는 개발자는 JSX 노드에 시그널 값을 직접 넣어주지만, 실제로는 **SingalValue**라는 컴포넌트로 변경되는 셈입니다!
+**이제 모든 비밀이 풀렸습니다!**
 
 시그널을 사용했을 때 관찰했던 현상은 **컴포넌트 전체 렌더링이 발생하지 않네?** 였지만, 실제로는 시그널 자체가 하나의 작은 컴포넌트로 변환되기 때문에 **SignalValue** 컴포넌트만 리렌더링이 일어나고 있었습니다.
 
 ## 리액트는 왜 이렇게 하지 않을까?
 
-여러 rfc 문서나 트위터(X)에 올라오는 리액트 핵심 개발자들의 반응들을 보다 보면, 리액트 역시 자체적인 상태관리 로직에 불편한 점과 비효율적인 부분이 있다는 점을 일부 인지하고 있는 것으로 보입니다.
+여러 rfc 문서나 X(트위터)에 올라오는 리액트 핵심 개발자들의 반응들을 보다 보면, 리액트 역시 자체적인 상태관리 로직에 불편한 점과 비효율적인 부분이 있다는 점을 일부 인지하고 있는 것으로 보입니다.
 
 왜 리액트는 시그널과 같은 해결책을 자체적인 대안으로 제시하지 않는 걸까요?
 
@@ -532,18 +528,16 @@ Object.defineProperties(Signal.prototype, {
 
 ---
 
-태생부터가 이러한 문제들의 해결책으로부터 등장한 리액트인 만큼, 일견 이러한 조심스러운 태도가 이해되기도 합니다.
+태생부터 데이터 흐름에 대한 복잡성에 대한 해결책으로부터 등장한 리액트인 만큼, 다소 비용이 들더라도 전체 렌더 트리를 다시 호출하면서 컴포넌트 단위(Fiber 객체)의 비교를 통해 트리의 노드를 교체하거나 갱신하는 것이 결과적으로는 가장 부작용을 줄이고 문제를 최소화 하는 해결책으로 보는게 아닐까 싶습니다.
 
-다소 비용이 들더라도 전체 렌더 트리를 다시 호출하면서 컴포넌트 단위(Fiber 객체)의 비교를 통해 트리의 노드를 교체하거나 갱신하는 것이 결과적으로는 가장 부작용을 줄이고 문제를 최소화 하는 해결책으로 보는게 아닐까요?
-
-Dan Abramov의 최근 코멘트에서도 이러한 입장을 다시 확인할 수 있었습니다.
+Dan Abramov의 최근 코멘트를 보면 흥미로운 부분이 많습니다.
 
 > 💡 …
 > In React, *all your rendering logic is your "template"*. This lets you use `if` statements and control flow without regrouping your code around every value you render. This also ensures that the user *always* sees fresh values. That's what I meant by React not "missing" updates. React doesn't let you write rendering logic that leaves initialization and updates out of sync.
 >
 > [https://dev.to/this-is-learning/react-vs-signals-10-years-later-3k71#comment-256g9](https://dev.to/this-is-learning/react-vs-signals-10-years-later-3k71#comment-256g9)
 
-Dan Abramov가 생각하는 리액트는 컴포넌트 자체를 이미 하나의 **순수한 템플릿** 으로 간주하고 있으며, 컴포넌트 내부에 선언된 모든 함수와 로직이 매 렌더링시마다 동일하게 동작하도록 보장하는 것을 가장 중요하게 생각하고 있습니다.
+Dan Abramov는 리액트의 컴포넌트 자체를 이미 하나의 **순수한 템플릿** 으로 간주하고 있으며, 컴포넌트 내부에 선언된 모든 함수와 로직이 매 렌더링시마다 동일하게 동작하도록 보장하는 것을 가장 중요하게 생각하고 있습니다.
 
 이러한 관점에서 보면 매 렌더링시마다 값이 유지되는 **useState, useMemo, useRef** 들이 오히려 템플릿의 예외케이스가 되는 셈입니다. 리액트 개발자들은 리액트가 프레임워크가 아닌 view 라이브러리라고 주장하는데, 그 의견과도 일맥상통한다고 할 수 있겠네요.
 
@@ -629,13 +623,13 @@ Dan Abramov 역시 preact 진영의 시그널 구현체를 사용하지 않을 �
 사실 개인적으로도 Preact의 시그널 구현체를 보면서 우려스러웠던 부분이 많았습니다. 특히 **getDispatcherType** 구현체에서는 디스패쳐를 통해 접근한 리액트 소스코드 내부의 함수 이름(…)을 정규식으로 찾아내서 **DispatcherType** 에 대한 가정을 하는 로직이 다수 존재했습니다.
 
 ```tsx
-    let useReducerImpl = dispatcher.useReducer.toString();
-		if (
-			/rerenderReducer/.test(useReducerImpl) ||
-			/return\s*\[\w+,/.test(useReducerImpl)
-		) {
-			type = RerenderDispatcherType;
-    }
+let useReducerImpl = dispatcher.useReducer.toString();
+if (
+  /rerenderReducer/.test(useReducerImpl) ||
+  /return\s*\[\w+,/.test(useReducerImpl)
+) {
+  type = RerenderDispatcherType;
+}
 ```
 [https://github.com/preactjs/signals/blob/6b6af05d433b4d2a8da0be5a65ba5305d49e7b73/packages/react/src/index.ts#L333](https://github.com/preactjs/signals/blob/6b6af05d433b4d2a8da0be5a65ba5305d49e7b73/packages/react/src/index.ts#L333)
 
