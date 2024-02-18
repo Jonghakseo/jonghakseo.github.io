@@ -9,20 +9,29 @@ const MAX_POSTS = 10;
 const allPosts = await getCollection("post");
 const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 
-const careers: Array<{ title: string; desc: string; href: string }> = [
+const careers: Array<{ title: string; desc: string; href: string; type: "full" | "part" }> = [
 	{
 		title: "Creatrip",
-		desc: "Front-end Engineer & Front-end Part Leader.",
+		type: "full",
+		desc: "Front-end Part Leader. (since 2023.11)",
 		href: "https://www.creatrip.com/en",
 	},
 	{
 		title: "Casemark AI",
-		desc: "Chrome extension consultant.",
+		type: "part",
+		desc: "Chrome extension consultant. (2023.5 ~ 2023.11)",
 		href: "https://www.casemark.ai/",
 	},
 	{
+		title: "Creatrip",
+		type: "full",
+		desc: "Front-end Engineer. (2021.12 ~ 2023.11)",
+		href: "https://www.creatrip.com/en",
+	},
+	{
 		title: "Slog-up",
-		desc: "Front-end Engineer.",
+		type: "full",
+		desc: "Front-end Engineer. (2019.09 ~ 2021.12)",
 		href: "https://slogup.com/",
 	},
 ];
@@ -55,7 +64,7 @@ const careers: Array<{ title: string; desc: string; href: string }> = [
 		<h2 class="title mb-4 text-xl">Careers</h2>
 		<ul class="space-y-4 sm:space-y-2">
 			{
-				careers.map(({ href, title, desc }) => (
+				careers.map(({ href, title, desc, type }) => (
 					<li>
 						<a
 							href={href}
@@ -65,7 +74,10 @@ const careers: Array<{ title: string; desc: string; href: string }> = [
 						>
 							{title}
 						</a>
-						:<p class="inline-block sm:mt-2">{desc}</p>
+						{": "}
+						<p class="inline-block sm:mt-2">
+							[{type} time] {desc}
+						</p>
 					</li>
 				))
 			}
