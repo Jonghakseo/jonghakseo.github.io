@@ -21,11 +21,11 @@ const meta = {
 			style="border-radius: 16px"
 		/>
 		<div class="col-span-2 flex flex-col gap-2">
-			<h2 class="title text-xl">Introduction</h2>
+			<h2 class="title mb-2 text-xl">Introduction</h2>
 			<p>Hi, I'm Jonghak Seo. You may call me Jong.</p>
-			<small> When I'm off work,</small>
+			<small class="text-accent"> When I'm off work,</small>
 			<p>I'm a software engineer who loves the OSS ecosystem and is motivated by helping others.</p>
-			<small> When I'm on work,</small>
+			<small class="text-accent"> When I'm on work,</small>
 			<p>
 				I'm a front-end engineer who efforts to improve the productivity of the team by creating
 				various tools. (e.g. custom eslint rules, development tool extensions, host a seminar. etc.)
@@ -35,9 +35,8 @@ const meta = {
 				through the pain and learning process.
 			</strong>
 
-			<h2 class="title text-xl">Experience</h2>
-
-			<ul class="flex flex-col gap-2">
+			<h2 class="title mb-2 mt-6 text-xl">Experience</h2>
+			<ul class="flex flex-col gap-4">
 				<li>
 					<p class="text-lg">
 						<strong>Front-end Part Lead</strong><small> at Creatrip (2023.11 ~)</small>
@@ -46,7 +45,7 @@ const meta = {
 						TypeScript, Next.js, React, Apollo Client, styled-components, rtl, jest
 					</small>
 					<br />
-					<p class="text-sm">
+					<p class="mt-2 text-sm">
 						Charge of front-end development, technical decision-making, productivity assurance, SEO
 						optimization, and performance-related issues and debugging.
 					</p>
@@ -58,7 +57,7 @@ const meta = {
 					<small class="text-accent">
 						TypeScript, Next.js, React, Apollo Client, styled-components, rtl, jest
 					</small>
-					<p class="text-sm">
+					<p class="mt-2 text-sm">
 						Responsible for the front-end part of the company's user web/admin app. I built the
 						user's reservation and purchase flow on this complex e-commerce web.
 					</p>
@@ -68,7 +67,7 @@ const meta = {
 						<strong>Front-end Engineer</strong><small> at Slogup (2020.09 ~ 2021.12)</small>
 					</p>
 					<small class="text-accent"> TypeScript, Next.js, React, SWR, Redux, css-modules</small>
-					<p class="text-sm">
+					<p class="mt-2 text-sm">
 						Made the company's main service, Slogup, and the admin page.
 						<br />
 						 I was in charge of the development of SK's new service, [<a
@@ -77,34 +76,40 @@ const meta = {
 					</p>
 				</li>
 			</ul>
-			<h2 class="title text-xl">Side Projects</h2>
-			<p>
-				[<a
-					class="font-bold"
-					href="https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite"
-					target="_blank"
-					rel="noopener noreferrer">chrome-extension-boilerplate</a
-				>]
-			</p>
-			<p>Boilerplate for Chrome Extension with React and Vite.</p>
-			<small>
-				I started this project to easily develop my own Chrome extension while studying Vite. It has
-				own HMR feature using wss. And it has received more than <strong>1K stars</strong>. 😎
-			</small>
-			<p>
-				[<a
-					class="font-bold"
-					href="https://chromewebstore.google.com/detail/akgdgnhlglhelinkmnmiakgccdkghjbh"
-					target="_blank"
-					rel="noopener noreferrer">DragGPT chrome extension</a
-				>]
-			</p>
-			<p>Chrome extension for using ChatGPT API via dragging.</p>
-			<small>
-				I made this extension to make it easier to use the ChatGPT API. It has received more than
-				<strong>150 users</strong> and <strong>30 stars</strong>.
-			</small>
-			<h2 class="title text-xl">What I'm looking for</h2>
+			<h2 class="title mb-2 mt-6 text-xl">Side Projects</h2>
+			<ul class="flex flex-col gap-4">
+				<li>
+					<strong>
+						<a
+							href="https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite"
+							target="_blank"
+							rel="noopener noreferrer">[chrome-extension-boilerplate]</a
+						>
+					</strong>
+					<p class="mb-2 mt-2">Boilerplate for Chrome Extension with React and Vite.</p>
+					<p>
+						I started this project to easily develop my own Chrome extension while studying Vite. It
+						has own HMR feature using wss. And it has received more than <strong>1K stars</strong>.
+						😎
+					</p>
+				</li>
+				<li>
+					<strong>
+						<a
+							href="https://chromewebstore.google.com/detail/akgdgnhlglhelinkmnmiakgccdkghjbh"
+							target="_blank"
+							rel="noopener noreferrer">[DragGPT chrome extension]</a
+						>
+					</strong>
+					<p class="mb-2 mt-2">Chrome extension for using ChatGPT API via dragging.</p>
+					<p>
+						I made this extension to make it easier to use the ChatGPT API. It has received more
+						than
+						<strong>150 users</strong> and <strong>30 stars</strong>.
+					</p>
+				</li>
+			</ul>
+			<h2 class="title mb-2 mt-6 text-xl">What I'm looking for</h2>
 			<p>
 				I'm looking for a team that can provide a new environment for growth and a place where I can
 				contribute to the team with my skills and experience.
@@ -113,6 +118,7 @@ const meta = {
 				I also like the freedom that comes with remote work and high responsibility and
 				productivity.
 			</p>
+			<br />
 			<a href="mailto:unqocn@gmail.com" class="text-accent">
 				<strong>Feel free to contact me.</strong>
 			</a>
