@@ -58,7 +58,7 @@ function Counter() {
 - 💡Preact란?
 
     _기존 React의 조정자(Reconcilation), 합성 이벤트(SyntheticEvent) 등의 편의기능 + 고도화 기능들을 제거하고 번들 용량과 성능에 올인하는 JSX를 사용한 UI 렌더링 라이브러리입니다.
-    React와 달리 번들 크기 절약에 대해 굉장히 어필을 하고 있는데, 10.19.2 버전 기준 압축 용량으로는 4.5kb를 자랑하며 React 진영의 react(2.5kB) + reacto-dom(42kB) 에 비해 확실한 강점을 가지고 있습니다._
+    React와 달리 번들 크기 절약에 대해 굉장히 어필을 하고 있는데, 10.19.2 버전 기준 압축 용량으로는 4.5kb를 자랑하며 React 진영의 react(2.5kB) + react-dom(42kB) 에 비해 확실한 강점을 가지고 있습니다._
 
 
 ## 시그널 개념의 등장
