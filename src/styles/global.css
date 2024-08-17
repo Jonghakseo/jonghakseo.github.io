@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'WantedSans';
+  font-display: swap;
+  src: url('/fonts/WantedSansVariable.woff2') format('woff2');
+}
+
 @layer base {
+
 	:root {
 		color-scheme: light;
 		/* https://tailwindcss.com/docs/customizing-colors#using-css-variables */
@@ -29,7 +36,8 @@
 	}
 
 	html body {
-		@apply mx-auto flex min-h-screen max-w-5xl flex-col bg-bgColor px-8 pt-16 font-mono text-sm font-normal text-textColor antialiased;
+		@apply mx-auto flex min-h-screen max-w-5xl flex-col bg-bgColor px-8 pt-16 font-normal text-textColor antialiased;
+    font-family: WantedSans, sans-serif;
 	}
 
   .video-container {
