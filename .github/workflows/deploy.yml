@@ -19,9 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -29,13 +29,7 @@ jobs:
             ${{ runner.os }}-node-modules-
 
       - name: Install, build, and upload your site
-        uses: withastro/action@v0
-        with:
-          path: . # The root location of your Astro project inside the repository. (optional)
-          node-version: 18 # The specific version of Node that should be used to build your site. Defaults to 16. (optional)
-          package-manager: pnpm # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
-          pnpm-version: 8.6.1  # If `package-manager` is set to `pnpm`, use this specific version. Defaults to `7.x.x`. (optional)
-#          resolve-dep-from-path: false # If the dependency file should be resolved from the root location of your Astro project. Defaults to `true`. (optional)
+        uses: withastro/action@v2
 
   deploy:
     needs: build
