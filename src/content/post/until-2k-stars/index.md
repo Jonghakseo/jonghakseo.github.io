@@ -110,6 +110,15 @@ I could easily use the Chrome extension's storage in each page and conveniently 
 
 I could add these features without any burden, and each developer using the boilerplate could easily opt-out of unwanted features.
 
+Now, this boilerplate has few features for extension development, such as:
+
+- Hot Module Reload/Refresh (HMR) support.
+- I18n support without manual extension reload.
+- Easy-to-use storage API (`createStorage`, `useStorage`).
+- Basic support for Tailwind CSS & extendable UI component package.
+- Extension zipper for easy distribution (`pnpm zip`).
+- And more...
+
 ## 5. Contributors and Community
 
 This project has grown to this point thanks to the contributions of many people in various forms.
