@@ -42,7 +42,7 @@ lang: "ko"
 나는 엔지니어들이 양극화될 것으로 생각했다. 코어 레벨에서 LLM이 알고 있는 기존의 패턴으로는 해결할 수 없는 문제들을 정말 고도의 집중력과 사고력으로 풀어내는 개발자들과, 프로덕트 관점의 엔지니어.
 
 <a href="https://blog.pragmaticengineer.com/the-product-minded-engineer/" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
-  <img src="./img2.jpg" alt="The Product-Minded Software Engineer" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <img src="/images/2025-retrospective/img2.jpg" alt="The Product-Minded Software Engineer" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
   <div class="min-w-0 flex-1">
     <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">The Product-Minded Software Engineer</p>
     <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">blog.pragmaticengineer.com</p>
@@ -52,7 +52,7 @@ lang: "ko"
 자연스럽게 후자의 방향을 생각했다. 전자는 LLM과 경쟁을 해야 하고, 후자는 그래도 사람들과 경쟁해야 하는 영역이라고 생각했으니까. 그런 관점에서 이런저런 이야기를 많이 했던 것 같다.
 
 <a href="https://www.linkedin.com/posts/jong-hak-seo-9142ba200_activity-7290005899765116928-Z5PA" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
-  <img src="./img3.jpg" alt="늘 고민이 많은 요즘입니다... (LinkedIn)" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <img src="/images/2025-retrospective/img3.jpg" alt="늘 고민이 많은 요즘입니다... (LinkedIn)" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
   <div class="min-w-0 flex-1">
     <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">늘 고민이 많은 요즘입니다... (LinkedIn)</p>
     <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">linkedin.com</p>
@@ -64,7 +64,7 @@ lang: "ko"
 채용 과제도 AI를 적극적으로 쓰고, 대신 프롬프트를 첨부해달라고 나름 그 당시엔 파격적으로 진행해봤는데 굉장히 경험이 좋았다. 결국 우리가 알고자 하는 건 같이 일하는 구성원이 어떤 사고를 하며 일을 하는지인데, 그게 프롬프트에 다 드러나더라. 사실 기술 수준이나 그 사람의 기준 같은 것도 다 프롬프트에 드러났던 것 같다.
 
 <a href="https://www.linkedin.com/posts/jong-hak-seo-9142ba200_activity-7253738023455531008-iSt5" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
-  <img src="./img4.png" alt="크리에이트립 프론트엔드 채용 과제를 살짝 공개(?) (LinkedIn)" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <img src="/images/2025-retrospective/img4.png" alt="크리에이트립 프론트엔드 채용 과제를 살짝 공개(?) (LinkedIn)" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
   <div class="min-w-0 flex-1">
     <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">크리에이트립 프론트엔드 채용 과제를 살짝 공개(?) (LinkedIn)</p>
     <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">linkedin.com</p>
@@ -80,7 +80,7 @@ lang: "ko"
 한편 매번 채용에서 겪는 어려움을 타파하고자, 개발팀 자체의 브랜딩에 대해서도 노력을 쏟았던 것 같다. 그 일환으로 개발팀의 3, 4분기 예산과 일부 엔지니어들의 노력을 통해 Dev Talk라는 이름의 개발 밋업도 진행했다.
 
 <a href="https://event-us.kr/creatripdev/event/113880" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
-  <img src="./img5.png" alt="Creatrip Dev Talk - 이벤터스" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <img src="/images/2025-retrospective/img5.png" alt="Creatrip Dev Talk - 이벤터스" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
   <div class="min-w-0 flex-1">
     <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">Creatrip Dev Talk - 이벤터스</p>
     <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">event-us.kr</p>
@@ -98,7 +98,7 @@ lang: "ko"
 프로덕트 레포에서 암묵지를 발견할 때마다 ESLint 룰로 만들어서 잠갔고, 룰로 잡기 어려운 건 가이드라인 문서로 남겨 동적으로 참조할 수 있는 구조를 만들었다.. 돌아보니 한 해 동안 커스텀 ESLint 규칙만 30건 넘게 추가했다. 최근에 다른 글들을 보니 비슷한 경험을 하는 사람들은 비슷한 결론에 도달하는구나 싶다.
 
 <a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
-  <img src="./img6.png" alt="Effective harnesses for long-running agents" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <img src="/images/2025-retrospective/img6.png" alt="Effective harnesses for long-running agents" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
   <div class="min-w-0 flex-1">
     <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">Effective harnesses for long-running agents</p>
     <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">anthropic.com</p>
@@ -106,7 +106,7 @@ lang: "ko"
 </a>
 
 <a href="https://openai.com/index/harness-engineering/" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
-  <img src="./img7.png" alt="Harness engineering: leveraging Codex in an agent-first world" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <img src="/images/2025-retrospective/img7.png" alt="Harness engineering: leveraging Codex in an agent-first world" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
   <div class="min-w-0 flex-1">
     <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">Harness engineering: leveraging Codex in an agent-first world</p>
     <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">openai.com</p>
@@ -142,7 +142,7 @@ AI와 함께하는 생산성 향상?
 올해 6월6일6시(666), 아주 특별하고 재미있는 결혼식을 했다. 신랑이 마법사 지팡이를 들고, 신부가 쌍검을 들고 들어오는...
 
 <a href="https://dasom-jonghak.wedding/" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
-  <img src="./img9.png" alt="다솜이와 종학이의 결혼식에 초대합니다 💍" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <img src="/images/2025-retrospective/img9.png" alt="다솜이와 종학이의 결혼식에 초대합니다 💍" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
   <div class="min-w-0 flex-1">
     <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">다솜이와 종학이의 결혼식에 초대합니다 💍</p>
     <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">dasom-jonghak.wedding</p>
