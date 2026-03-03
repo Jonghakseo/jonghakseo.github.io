@@ -62,6 +62,7 @@ const targetLang = lang === "ko" ? "en" : "ko";
 		const langParam = urlParams.get("lang");
 
 		let translationQuality: string | null = null;
+		let translationTitle: string | null = null;
 
 		async function loadTranslation(): Promise<string | null> {
 			if (translationCache) return translationCache;
@@ -77,6 +78,7 @@ const targetLang = lang === "ko" ? "en" : "ko";
 				// DOMParser로 body content만 추출 (Astro boilerplate 제거)
 				const doc = new DOMParser().parseFromString(rawHtml, "text/html");
 				translationQuality = doc.body.dataset.translationQuality ?? null;
+				translationTitle = doc.body.dataset.translationTitle ?? null;
 				translationCache = doc.body.innerHTML;
 				return translationCache;
 			} catch (e) {
@@ -110,6 +112,8 @@ const targetLang = lang === "ko" ? "en" : "ko";
 			}
 		}
 
+		let originalTitle: string | null = null;
+
 		async function showTranslation() {
 			const postContent = document.getElementById("post-content");
 			if (!postContent) return;
@@ -125,6 +129,18 @@ const targetLang = lang === "ko" ? "en" : "ko";
 			isShowingTranslation = true;
 			toggleBtn!.textContent = labelTranslation;
 			toggleBtn!.disabled = false;
+
+			// Swap title in hero
+			const titleEl = document.querySelector("#blog-hero .title");
+			if (titleEl && translationTitle) {
+				if (!originalTitle) originalTitle = titleEl.textContent;
+				titleEl.textContent = translationTitle;
+			}
+
+			// Swap document title
+			if (translationTitle) {
+				document.title = translationTitle;
+			}
 
 			showQualityBanner(true);
 
@@ -142,6 +158,17 @@ const targetLang = lang === "ko" ? "en" : "ko";
 			postContent.innerHTML = originalContent;
 			isShowingTranslation = false;
 			toggleBtn!.textContent = labelOriginal;
+
+			// Restore title in hero
+			const titleEl = document.querySelector("#blog-hero .title");
+			if (titleEl && originalTitle) {
+				titleEl.textContent = originalTitle;
+			}
+
+			// Restore document title
+			if (originalTitle) {
+				document.title = originalTitle;
+			}
 
 			// Update URL without navigation
 			const newUrl = new URL(window.location.href);

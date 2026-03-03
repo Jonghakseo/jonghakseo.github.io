@@ -27,7 +27,7 @@ const quality = entry.data.translationQuality ?? "draft";
 	<head>
 		<meta name="robots" content="noindex, nofollow" />
 	</head>
-	<body data-translation-quality={quality}>
+	<body data-translation-quality={quality} data-translation-title={entry.data.title} data-translation-description={entry.data.description}>
 		<Content />
 	</body>
 </html>
