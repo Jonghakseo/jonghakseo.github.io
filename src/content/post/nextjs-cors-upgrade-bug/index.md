@@ -4,6 +4,7 @@ description: "Next.js 12에서 13으로 버전업 후 발생한 정적파일 COR
 publishDate: "2024-02-28"
 tags: ["nextjs", "cors", "debugging"]
 lang: "ko"
+translationSlug: "nextjs-cors-upgrade-bug-en"
 ---
 
 ![CORS 에러 발생](./img1.png)

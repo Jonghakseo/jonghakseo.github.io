@@ -4,6 +4,7 @@ description: "Azure OpenAI와 Next.js로 사내 AI 챗봇을 구축한 경험과
 publishDate: "2025-02-20"
 tags: ["ai", "chatbot", "azure", "nextjs"]
 lang: "ko"
+translationSlug: "building-internal-ai-chatbot-en"
 ---
 
 안녕하세요. 크리에이트립(Creatrip) FE 개발자 서종학입니다.

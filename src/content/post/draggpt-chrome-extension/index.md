@@ -4,6 +4,7 @@ description: "ChatGPT API를 활용한 크롬 익스텐션 DragGPT의 개발 과
 publishDate: "2023-03-18"
 tags: ["chatgpt", "draggpt", "react", "xstate"]
 lang: "ko"
+translationSlug: "draggpt-chrome-extension-en"
 ---
 
 ### 배경

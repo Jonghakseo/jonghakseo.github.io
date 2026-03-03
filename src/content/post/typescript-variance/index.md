@@ -4,6 +4,7 @@ description: "TypeScript에서 공변성과 반공변성이 함수 타입에 어
 publishDate: "2023-07-14"
 tags: ["typescript"]
 lang: "ko"
+translationSlug: "typescript-variance-en"
 ---
 
 ## 공변성과 반공변성

@@ -4,6 +4,7 @@ description: "모노레포 환경에서 내부 패키지의 HMR이 동작하지 
 publishDate: "2024-11-16"
 tags: ["hmr", "monorepo", "vite"]
 lang: "ko"
+translationSlug: "monorepo-hmr-en"
 ---
 
 우리 회사의 프론트엔드 레포는 모노레포 환경으로 동작하고 있다. 작년 9월쯤 터보레포 기반의 모노레포로 전환했고, 올해 3월에 pnpm을 적용했다.

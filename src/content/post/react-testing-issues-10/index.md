@@ -4,6 +4,7 @@ description: "1년간 React 테스트 코드를 작성하며 겪은 jsdom, userE
 publishDate: "2023-01-22"
 tags: ["jest", "jsdom", "react", "react-testing-library", "test", "userevent"]
 lang: "ko"
+translationSlug: "react-testing-issues-10-en"
 ---
 
 테스트 환경은 다음과 같습니다.

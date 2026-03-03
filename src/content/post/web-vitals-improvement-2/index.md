@@ -4,6 +4,7 @@ description: "ECS 환경에서 ISR 캐시 미스 문제를 SSR + CDN 캐싱으�
 publishDate: "2024-11-20"
 tags: ["core web vitals"]
 lang: "ko"
+translationSlug: "web-vitals-improvement-2-en"
 ---
 
 [지난 1편](/posts/web-vitals-improvement-1)에 이어 웹 바이탈 개선을 위해 했던 작업에 대해 이야기해보려고 한다.
