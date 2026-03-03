@@ -115,6 +115,19 @@ I even set up simple symbols after `>>` to extremely simplify and personalize su
 
 `>>? (Researcher)`, `>># (Planner)`, `>>@ (Browser)` and so on... The convenience is hard to overstate. I was surprised myself that this level of customization was even possible.
 
+### '<>' and '><' — Moving Freely Between Layers
+
+If `>>` is the experience of "spawning a child agent," then `<>` and `><` are about moving freely between that child and its parent.
+
+- `<> <runId>` — *enter* an already-running sub-agent session.
+- `><` — *come back up* from a sub-agent to the parent.
+
+Here's what it looks like in practice. You fire off `>> review this PR`. Back in the main agent, you're working on something else — then you decide you want to give the review agent some extra context. `<> <runId>` and you teleport right into that agent's session. Say what you need to say, then `><` to return to main.
+
+Fork as many agents as you want. Drop into any of them whenever you feel like it. Come back up whenever you're done. The agent hierarchy is real, but the boundaries feel naturally open — like switching between browser tabs, except those tabs are thinking agents at different levels of context.
+
+Once this system becomes second nature, something shifts. You're not just "sending agents off and hoping for the best." You can step into any agent, course-correct in real time, and step back out. It turns delegation from an act of faith into something you can actually steer.
+
 ### /github Overlay
 
 After doing code reviews or opening PRs, checking if AI reviews were done or CI had finished meant going to GitHub every time. Open the browser, navigate to the PR page, scroll down...
