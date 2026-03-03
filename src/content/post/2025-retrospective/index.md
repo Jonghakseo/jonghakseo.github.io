@@ -41,23 +41,35 @@ lang: "ko"
 
 나는 엔지니어들이 양극화될 것으로 생각했다. 코어 레벨에서 LLM이 알고 있는 기존의 패턴으로는 해결할 수 없는 문제들을 정말 고도의 집중력과 사고력으로 풀어내는 개발자들과, 프로덕트 관점의 엔지니어.
 
-[https://blog.pragmaticengineer.com/the-product-minded-engineer/](https://blog.pragmaticengineer.com/the-product-minded-engineer)
-
-![](./img2.jpg)
+<a href="https://blog.pragmaticengineer.com/the-product-minded-engineer/" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
+  <img src="./img2.jpg" alt="The Product-Minded Software Engineer" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <div class="min-w-0 flex-1">
+    <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">The Product-Minded Software Engineer</p>
+    <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">blog.pragmaticengineer.com</p>
+  </div>
+</a>
 
 자연스럽게 후자의 방향을 생각했다. 전자는 LLM과 경쟁을 해야 하고, 후자는 그래도 사람들과 경쟁해야 하는 영역이라고 생각했으니까. 그런 관점에서 이런저런 이야기를 많이 했던 것 같다.
 
-[늘 고민이 많은 요즘입니다. 오늘은 부끄럽지만(...) 제가 저희 엔지니어 팀 슬랙 채널에 공유했던 글 - LinkedIn](https://www.linkedin.com/posts/jong-hak-seo-9142ba200_%EB%8A%98-%EA%B3%A0%EB%AF%BC%EC%9D%B4-%EB%A7%8E%EC%9D%80-%EC%9A%94%EC%A6%98%EC%9E%85%EB%8B%88%EB%8B%A4-%EC%98%A4%EB%8A%98%EC%9D%80-%EB%B6%80%EB%81%84%EB%9F%BD%EC%A7%80%EB%A7%8C-%EC%A0%9C%EA%B0%80-%EC%A0%80%ED%9D%AC-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4-activity-7371086850830069760-CaI3?utm_source=share&utm_medium=member_desktop&rcm=ACoAADNNW6AB2kgn3BEW5sUgd8sS2ncRm538MEk)
-
-![](./img3.jpg)
+<a href="https://www.linkedin.com/posts/jong-hak-seo-9142ba200_activity-7290005899765116928-Z5PA" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
+  <img src="./img3.jpg" alt="늘 고민이 많은 요즘입니다... (LinkedIn)" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <div class="min-w-0 flex-1">
+    <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">늘 고민이 많은 요즘입니다... (LinkedIn)</p>
+    <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">linkedin.com</p>
+  </div>
+</a>
 
 ## 채용, 팀 리빌딩
 
 채용 과제도 AI를 적극적으로 쓰고, 대신 프롬프트를 첨부해달라고 나름 그 당시엔 파격적으로 진행해봤는데 굉장히 경험이 좋았다. 결국 우리가 알고자 하는 건 같이 일하는 구성원이 어떤 사고를 하며 일을 하는지인데, 그게 프롬프트에 다 드러나더라. 사실 기술 수준이나 그 사람의 기준 같은 것도 다 프롬프트에 드러났던 것 같다.
 
-[[크리에이트립 프론트엔드 채용 과제를 살짝 공개(?)합니다] - LinkedIn](https://www.linkedin.com/posts/jong-hak-seo-9142ba200_%ED%81%AC%EB%A6%AC%EC%97%90%EC%9D%B4%ED%8A%B8%EB%A6%BD-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%B1%84%EC%9A%A9-%EA%B3%BC%EC%A0%9C%EB%A5%BC-%EC%82%B4%EC%A7%9D-%EA%B3%B5%EA%B0%9C%ED%95%A9%EB%8B%88%EB%8B%A4-%ED%81%AC%EB%A6%AC%EC%97%90%EC%9D%B4%ED%8A%B8%EB%A6%BD%EC%9D%98-activity-7351433034027487233-Si_A?utm_source=share&utm_medium=member_desktop&rcm=ACoAADNNW6AB2kgn3BEW5sUgd8sS2ncRm538MEk)
-
-![](./img4.png)
+<a href="https://www.linkedin.com/posts/jong-hak-seo-9142ba200_activity-7253738023455531008-iSt5" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
+  <img src="./img4.png" alt="크리에이트립 프론트엔드 채용 과제를 살짝 공개(?) (LinkedIn)" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <div class="min-w-0 flex-1">
+    <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">크리에이트립 프론트엔드 채용 과제를 살짝 공개(?) (LinkedIn)</p>
+    <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">linkedin.com</p>
+  </div>
+</a>
 
 지금 생각해도, 덕분에 새 시대에 맞는 정말 훌륭한 프론트엔드 엔지니어분들을 채용해서 참 다행이라고 생각한다.
 
@@ -67,9 +79,13 @@ lang: "ko"
 
 한편 매번 채용에서 겪는 어려움을 타파하고자, 개발팀 자체의 브랜딩에 대해서도 노력을 쏟았던 것 같다. 그 일환으로 개발팀의 3, 4분기 예산과 일부 엔지니어들의 노력을 통해 Dev Talk라는 이름의 개발 밋업도 진행했다.
 
-[Creatrip Dev Talk - 이벤터스](https://event-us.kr/creatripdev/event/113880?utm_source=sms&utm_medium=dm&utm_campaign=bhzaaaaaza)
-
-![](./img5.png)
+<a href="https://event-us.kr/creatripdev/event/113880" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
+  <img src="./img5.png" alt="Creatrip Dev Talk - 이벤터스" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <div class="min-w-0 flex-1">
+    <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">Creatrip Dev Talk - 이벤터스</p>
+    <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">event-us.kr</p>
+  </div>
+</a>
 
 이후 채용에서의 지원이 소폭 늘어난 것과, 크리에이트립 개발팀의 인지도 향상이라는 성과에 비해서 생각보다 더 리소스가 많이 들어갔던 것 같아서.. 미래에 한 번 더 진행이 될지는 모르겠다.
 
@@ -81,13 +97,21 @@ lang: "ko"
 
 프로덕트 레포에서 암묵지를 발견할 때마다 ESLint 룰로 만들어서 잠갔고, 룰로 잡기 어려운 건 가이드라인 문서로 남겨 동적으로 참조할 수 있는 구조를 만들었다.. 돌아보니 한 해 동안 커스텀 ESLint 규칙만 30건 넘게 추가했다. 최근에 다른 글들을 보니 비슷한 경험을 하는 사람들은 비슷한 결론에 도달하는구나 싶다.
 
-[https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
+<a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
+  <img src="./img6.png" alt="Effective harnesses for long-running agents" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <div class="min-w-0 flex-1">
+    <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">Effective harnesses for long-running agents</p>
+    <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">anthropic.com</p>
+  </div>
+</a>
 
-![](./img6.png)
-
-[https://openai.com/index/harness-engineering/](https://openai.com/index/harness-engineering/)
-
-![](./img7.png)
+<a href="https://openai.com/index/harness-engineering/" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
+  <img src="./img7.png" alt="Harness engineering: leveraging Codex in an agent-first world" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <div class="min-w-0 flex-1">
+    <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">Harness engineering: leveraging Codex in an agent-first world</p>
+    <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">openai.com</p>
+  </div>
+</a>
 
 한편 엔지니어분들도 타 직군의 익숙하지 않은 기술에 대해 빠르게 이해도를 높이고 AI에 대한 제어 혹은 감사 능력을 갖기 위해 매주 세미나를 진행했다(지금도 하고 있다).
 
@@ -117,9 +141,13 @@ AI와 함께하는 생산성 향상?
 
 올해 6월6일6시(666), 아주 특별하고 재미있는 결혼식을 했다. 신랑이 마법사 지팡이를 들고, 신부가 쌍검을 들고 들어오는...
 
-[https://dasom-jonghak.wedding/](https://dasom-jonghak.wedding/)
-
-![](./img9.png)
+<a href="https://dasom-jonghak.wedding/" target="_blank" rel="noopener noreferrer" class="not-prose my-4 flex items-center gap-4 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 p-4 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors no-underline">
+  <img src="./img9.png" alt="다솜이와 종학이의 결혼식에 초대합니다 💍" class="h-20 w-32 flex-shrink-0 rounded object-cover" />
+  <div class="min-w-0 flex-1">
+    <p class="truncate font-semibold text-zinc-900 dark:text-zinc-100 text-sm">다솜이와 종학이의 결혼식에 초대합니다 💍</p>
+    <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">dasom-jonghak.wedding</p>
+  </div>
+</a>
 
 신혼여행은 몽골을 2주 정도 다녀왔는데, 자연을 좋아하는 나에게는 너무나도 즐거운 시간이었다. 해발 2000m 고원을 달리는 차 안에서도 코딩은 할 수 있어서 좋았다.
 
