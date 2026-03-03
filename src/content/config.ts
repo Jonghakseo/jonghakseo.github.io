@@ -31,6 +31,7 @@ const post = defineCollection({
 			ogImage: z.string().optional(),
 			lang: z.enum(["ko", "en"]).default("en"),
 			translationSlug: z.string().optional(),
+			translationQuality: z.enum(["draft", "reviewed", "final"]).optional(),
 		}),
 });
 

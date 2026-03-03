@@ -20,13 +20,14 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+const quality = entry.data.translationQuality ?? "draft";
 ---
 
 <html>
 	<head>
 		<meta name="robots" content="noindex, nofollow" />
 	</head>
-	<body>
+	<body data-translation-quality={quality}>
 		<Content />
 	</body>
 </html>
