@@ -25,16 +25,17 @@ export function generateToc(headings: ReadonlyArray<MarkdownHeading>) {
 		if (heading.depth === 2) {
 			toc.push(heading);
 		} else {
-			const lastItemInToc = toc[toc.length - 1]!;
-			if (heading.depth < lastItemInToc.depth) {
-				throw new Error(`Orphan heading found: ${heading.text}.`);
+			const lastItemInToc = toc[toc.length - 1];
+			// if no preceding h2 exists, treat as top-level item
+			if (!lastItemInToc || heading.depth < lastItemInToc.depth) {
+				toc.push(heading);
+			} else {
+				// higher depth
+				// push into children, or children's children
+				const gap = heading.depth - lastItemInToc.depth;
+				const target = diveChildren(lastItemInToc, gap);
+				target.push(heading);
 			}
-
-			// higher depth
-			// push into children, or children's children
-			const gap = heading.depth - lastItemInToc.depth;
-			const target = diveChildren(lastItemInToc, gap);
-			target.push(heading);
 		}
 	});
 	return toc;
