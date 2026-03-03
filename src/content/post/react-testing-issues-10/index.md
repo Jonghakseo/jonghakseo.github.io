@@ -2,7 +2,7 @@
 title: "React 테스트를 작성하며 겪은 이슈 10가지"
 description: "1년간 React 테스트 코드를 작성하며 겪은 jsdom, userEvent, 접근성 등 주요 이슈 10가지를 정리합니다."
 publishDate: "2023-01-22"
-tags: ["jest", "jsdom", "react", "react-testing-library", "test", "userevent"]
+tags: ["react", "testing"]
 lang: "ko"
 translationSlug: "react-testing-issues-10-en"
 ---

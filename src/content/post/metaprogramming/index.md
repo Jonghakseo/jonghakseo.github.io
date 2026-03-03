@@ -2,7 +2,7 @@
 title: "Metaprogramming"
 publishDate: "2023/09/10"
 description: "This post is about metaprogramming. What is meta programming?"
-tags: ["meta", "meta programming", "proxy", "reflect"]
+tags: ["typescript"]
 lang: "en"
 translationSlug: "metaprogramming-ko"
 ---

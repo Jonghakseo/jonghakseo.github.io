@@ -2,7 +2,7 @@
 title: "Tracing the Flow of useQuery"
 description: "Following the source code of Apollo Client's useQuery hook to analyze the data fetching flow."
 publishDate: "2024-10-13"
-tags: ["apolloclient", "graphql", "react"]
+tags: ["react"]
 lang: "en"
 translationQuality: "draft"
 ---

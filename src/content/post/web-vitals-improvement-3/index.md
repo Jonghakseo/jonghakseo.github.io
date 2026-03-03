@@ -2,7 +2,7 @@
 title: "웹 바이탈 개선기 3편 - SWR 적용"
 description: "stale-while-revalidate 캐싱 전략을 CDN에 적용하여 웹 바이탈을 극적으로 개선한 경험을 공유합니다."
 publishDate: "2024-11-20"
-tags: ["core web vitals"]
+tags: ["web-performance", "nextjs"]
 lang: "ko"
 translationSlug: "web-vitals-improvement-3-en"
 ---

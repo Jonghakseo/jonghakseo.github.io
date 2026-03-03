@@ -2,7 +2,7 @@
 title: "Building an Internal AI Chatbot Service"
 description: "Sharing our experience of building an internal AI chatbot with Azure OpenAI and Next.js, including the troubleshooting process."
 publishDate: "2025-02-20"
-tags: ["ai", "chatbot", "azure", "nextjs"]
+tags: ["ai", "nextjs"]
 lang: "en"
 translationQuality: "draft"
 ---

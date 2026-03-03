@@ -2,7 +2,7 @@
 title: "10 Issues I Encountered While Writing React Tests"
 description: "A summary of 10 major issues including jsdom, userEvent, and accessibility that I encountered while writing React test code over the past year."
 publishDate: "2023-01-22"
-tags: ["jest", "jsdom", "react", "react-testing-library", "test", "userevent"]
+tags: ["react", "testing"]
 lang: "en"
 translationQuality: "draft"
 ---

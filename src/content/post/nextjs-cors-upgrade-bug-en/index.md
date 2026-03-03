@@ -2,7 +2,7 @@
 title: "Static File CORS Error After Next.js Version Upgrade"
 description: "Sharing the root cause and resolution of a CORS error on static files that occurred after upgrading from Next.js 12 to 13."
 publishDate: "2024-02-28"
-tags: ["nextjs", "cors", "debugging"]
+tags: ["nextjs"]
 lang: "en"
 translationQuality: "draft"
 ---

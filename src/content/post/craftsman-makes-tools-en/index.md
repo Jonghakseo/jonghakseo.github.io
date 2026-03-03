@@ -2,7 +2,7 @@
 title: "A Craftsman Doesn't Blame Tools. They Build Them."
 description: "A journey through coding agents, and the story of building my own tools with pi over one week."
 publishDate: "2026-03-03"
-tags: ["pi", "coding-agent", "developer-tools", "productivity"]
+tags: ["developer-tools"]
 lang: "en"
 translationQuality: "draft"
 ---

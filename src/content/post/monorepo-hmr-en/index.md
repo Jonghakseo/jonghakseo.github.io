@@ -2,7 +2,7 @@
 title: "Supporting HMR in a Monorepo"
 description: "How to solve the issue of internal packages not supporting HMR in a monorepo environment using resolve aliases."
 publishDate: "2024-11-16"
-tags: ["hmr", "monorepo", "vite"]
+tags: ["developer-tools"]
 lang: "en"
 translationQuality: "draft"
 ---

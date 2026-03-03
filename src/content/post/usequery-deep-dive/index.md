@@ -2,7 +2,7 @@
 title: "useQuery의 흐름 끄적끄적"
 description: "Apollo Client의 useQuery 훅 소스코드를 따라가며 데이터 요청 흐름을 분석합니다."
 publishDate: "2024-10-13"
-tags: ["apolloclient", "graphql", "react"]
+tags: ["react"]
 lang: "ko"
 translationSlug: "usequery-deep-dive-en"
 ---

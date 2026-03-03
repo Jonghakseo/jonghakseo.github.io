@@ -2,7 +2,7 @@
 title: "사내 AI 챗봇 서비스 구축하기"
 description: "Azure OpenAI와 Next.js로 사내 AI 챗봇을 구축한 경험과 트러블 슈팅 과정을 공유합니다."
 publishDate: "2025-02-20"
-tags: ["ai", "chatbot", "azure", "nextjs"]
+tags: ["ai", "nextjs"]
 lang: "ko"
 translationSlug: "building-internal-ai-chatbot-en"
 ---

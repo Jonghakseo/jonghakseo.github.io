@@ -2,7 +2,7 @@
 title: "Web Vitals Improvement 2: SSG to SSR Migration"
 description: "Sharing our experience of solving ISR cache miss issues in an ECS environment by switching to SSR + CDN caching for web vitals improvement."
 publishDate: "2024-11-20"
-tags: ["core web vitals"]
+tags: ["web-performance", "nextjs"]
 lang: "en"
 translationQuality: "draft"
 ---

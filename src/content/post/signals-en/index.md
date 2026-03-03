@@ -2,7 +2,7 @@
 title: "Signals"
 publishDate: "2023/12/23"
 description: "What are signals and why are they gaining attention in the frontend ecosystem?"
-tags: ["siganl", "preact", "frontend", "react"]
+tags: ["react", "typescript"]
 lang: "en"
 translationQuality: "draft"
 ---

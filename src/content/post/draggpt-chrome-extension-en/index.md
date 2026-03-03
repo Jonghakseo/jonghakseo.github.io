@@ -2,7 +2,7 @@
 title: "Building the DragGPT Chrome Extension"
 description: "Sharing the development journey of DragGPT, a Chrome extension built with the ChatGPT API, and my experience with XState."
 publishDate: "2023-03-18"
-tags: ["chatgpt", "draggpt", "react", "xstate"]
+tags: ["ai", "react", "open-source"]
 lang: "en"
 translationQuality: "draft"
 ---

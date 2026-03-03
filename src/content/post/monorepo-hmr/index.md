@@ -2,7 +2,7 @@
 title: "모노레포에서 HMR 지원하기"
 description: "모노레포 환경에서 내부 패키지의 HMR이 동작하지 않는 문제를 resolve alias로 해결하는 방법을 소개합니다."
 publishDate: "2024-11-16"
-tags: ["hmr", "monorepo", "vite"]
+tags: ["developer-tools"]
 lang: "ko"
 translationSlug: "monorepo-hmr-en"
 ---

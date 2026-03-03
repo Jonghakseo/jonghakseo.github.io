@@ -2,7 +2,7 @@
 title: "장인은 도구를 탓하지 않는다. 도구를 만든다."
 description: "코딩 에이전트 편력기이자 pi를 만나고 일주일간 내 도구를 만들어가는 과정의 기록."
 publishDate: "2026-03-03"
-tags: ["pi", "coding-agent", "developer-tools", "productivity"]
+tags: ["developer-tools"]
 lang: "ko"
 translationSlug: "craftsman-makes-tools-en"
 ---

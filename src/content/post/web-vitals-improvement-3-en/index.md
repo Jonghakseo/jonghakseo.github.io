@@ -2,7 +2,7 @@
 title: "Web Vitals Improvement Part 3 - Applying SWR"
 description: "Sharing our experience of dramatically improving web vitals by applying the stale-while-revalidate caching strategy to our CDN."
 publishDate: "2024-11-20"
-tags: ["core web vitals"]
+tags: ["web-performance", "nextjs"]
 lang: "en"
 translationQuality: "draft"
 ---

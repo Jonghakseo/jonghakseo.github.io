@@ -2,7 +2,7 @@
 title: "Open source to 2K stars."
 publishDate: "2024/08/17"
 description: "What I've learned from reaching 2000 Stars on GitHub."
-tags: ["open-source", "github", "chrome-extension", "boilerplate"]
+tags: ["open-source"]
 ---
 
 

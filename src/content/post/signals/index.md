@@ -2,7 +2,7 @@
 title: "Signals"
 publishDate: "2023/12/23"
 description: "시그널은 무엇이고 프론트엔드 생태계에서 주목을 받는 이유는 무엇일까?"
-tags: ["siganl", "preact", "frontend", "react"]
+tags: ["react", "typescript"]
 lang: "ko"
 translationSlug: "signals-en"
 ---

@@ -2,7 +2,7 @@
 title: "웹 바이탈 개선기 2편 - SSG 제거, SSR 전환"
 description: "ECS 환경에서 ISR 캐시 미스 문제를 SSR + CDN 캐싱으로 해결한 웹 바이탈 개선 경험을 공유합니다."
 publishDate: "2024-11-20"
-tags: ["core web vitals"]
+tags: ["web-performance", "nextjs"]
 lang: "ko"
 translationSlug: "web-vitals-improvement-2-en"
 ---

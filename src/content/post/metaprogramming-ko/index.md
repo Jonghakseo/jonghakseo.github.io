@@ -2,7 +2,7 @@
 title: "메타프로그래밍"
 publishDate: "2023/09/10"
 description: "메타프로그래밍이란 무엇인지에 대한 글입니다."
-tags: ["meta", "meta programming", "proxy", "reflect"]
+tags: ["typescript"]
 lang: "ko"
 translationQuality: "draft"
 ---

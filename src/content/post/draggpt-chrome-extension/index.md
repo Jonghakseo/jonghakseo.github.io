@@ -2,7 +2,7 @@
 title: "DragGPT chrome extension 개발기"
 description: "ChatGPT API를 활용한 크롬 익스텐션 DragGPT의 개발 과정과 XState 사용 경험을 공유합니다."
 publishDate: "2023-03-18"
-tags: ["chatgpt", "draggpt", "react", "xstate"]
+tags: ["ai", "react", "open-source"]
 lang: "ko"
 translationSlug: "draggpt-chrome-extension-en"
 ---

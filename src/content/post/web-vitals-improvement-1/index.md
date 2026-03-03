@@ -2,7 +2,7 @@
 title: "웹 바이탈 개선기 1편 - 다국어 동적 로드"
 description: "지난 1년간의 웹 바이탈 개선 과정 중 i18n 데이터 동적 로드를 통한 TBT(INP) 개선 경험을 공유합니다."
 publishDate: "2024-11-20"
-tags: ["core web vitals"]
+tags: ["web-performance", "nextjs"]
 lang: "ko"
 translationSlug: "web-vitals-improvement-1-en"
 ---

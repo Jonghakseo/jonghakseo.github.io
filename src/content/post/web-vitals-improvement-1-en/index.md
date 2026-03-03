@@ -2,7 +2,7 @@
 title: "Web Vitals Improvement Part 1 - Dynamic i18n Loading"
 description: "Sharing our experience of improving TBT (INP) through dynamic loading of i18n data as part of our year-long web vitals improvement journey."
 publishDate: "2024-11-20"
-tags: ["core web vitals"]
+tags: ["web-performance", "nextjs"]
 lang: "en"
 translationQuality: "draft"
 ---

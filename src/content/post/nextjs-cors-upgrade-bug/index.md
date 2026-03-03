@@ -2,7 +2,7 @@
 title: "Next.js 버전업 후 정적파일 CORS 에러"
 description: "Next.js 12에서 13으로 버전업 후 발생한 정적파일 CORS 에러의 원인과 해결 과정을 공유합니다."
 publishDate: "2024-02-28"
-tags: ["nextjs", "cors", "debugging"]
+tags: ["nextjs"]
 lang: "ko"
 translationSlug: "nextjs-cors-upgrade-bug-en"
 ---
