@@ -32,24 +32,24 @@ So what's the quick fix?
 In development, we just need to tell the HMR logic that these are internal dependencies, not external modules. But how?
 
 ```ts
-import { type AliasOptions, defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'node:path';
+import { type AliasOptions, defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "node:path";
 
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === "development";
 
 const devAliases = {
-  // Reference via local paths to support HMR for packages in development
-  '@ui': path.resolve(__dirname, '../../packages/ui/index'),
-  '@icon': path.resolve(__dirname, '../../packages/icon/index'),
-  '@style': path.resolve(__dirname, '../../packages/style/index'),
+	// Reference via local paths to support HMR for packages in development
+	"@ui": path.resolve(__dirname, "../../packages/ui/index"),
+	"@icon": path.resolve(__dirname, "../../packages/icon/index"),
+	"@style": path.resolve(__dirname, "../../packages/style/index"),
 } satisfies AliasOptions;
 
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: isDev ? devAliases : undefined,
-  },
+	plugins: [react()],
+	resolve: {
+		alias: isDev ? devAliases : undefined,
+	},
 });
 ```
 

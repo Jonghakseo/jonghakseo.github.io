@@ -85,7 +85,9 @@ const targetLang = lang === "ko" ? "en" : "ko";
 				if (tocJson) {
 					try {
 						translationHeadings = JSON.parse(tocJson);
-					} catch { /* ignore parse error */ }
+					} catch {
+						/* ignore parse error */
+					}
 				}
 				translationCache = doc.body.innerHTML;
 				return translationCache;
@@ -105,7 +107,9 @@ const targetLang = lang === "ko" ? "en" : "ko";
 			subheadings: TocItem[];
 		}
 
-		function buildTocTree(headings: Array<{ depth: number; slug: string; text: string }>): TocItem[] {
+		function buildTocTree(
+			headings: Array<{ depth: number; slug: string; text: string }>,
+		): TocItem[] {
 			const body = headings.filter((h) => h.depth > 1);
 			const toc: TocItem[] = [];
 

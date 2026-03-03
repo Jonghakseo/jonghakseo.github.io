@@ -17,7 +17,7 @@ At our company, static files generated from Next.js builds are served through S3
 
 As an immediate fix, we created a response header policy on the CDN for static files and added both the www and non-www domain origins to resolve the issue.
 
-We addressed it quickly, but figuring out *why* this suddenly became a problem was quite challenging.
+We addressed it quickly, but figuring out _why_ this suddenly became a problem was quite challenging.
 
 Initially, I wasn't even confident whether this issue started immediately after the deployment. It was also puzzling that SSG-generated static pages didn't have this issue.
 

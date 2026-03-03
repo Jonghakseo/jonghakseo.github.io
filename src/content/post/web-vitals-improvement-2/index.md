@@ -29,18 +29,18 @@ SSG를 싹 다 날리고 cloudfront 캐싱을 위한 캐시 헤더(s-maxage)를 
 
 ```ts
 export const setCDNCacheHeader = (res: ServerResponse, maxAge: number) => {
-  // 1초 이내 요청은 로컬 캐시를 사용하고, 1초 이후에는 CDN 캐시를 사용한다.
-  // 로컬 캐싱으로 발생할 수 있는 문제를 회피하고 컨텐츠의 최신화 여부를 CDN에 위임하는 방식.
-  res.setHeader('Cache-Control', `public, max-age=1, s-maxage=${sMaxAge}`);
+	// 1초 이내 요청은 로컬 캐시를 사용하고, 1초 이후에는 CDN 캐시를 사용한다.
+	// 로컬 캐싱으로 발생할 수 있는 문제를 회피하고 컨텐츠의 최신화 여부를 CDN에 위임하는 방식.
+	res.setHeader("Cache-Control", `public, max-age=1, s-maxage=${sMaxAge}`);
 };
 
 //...
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  //...
-  setCDNCacheHeader(res, 60); // 1분 동안 cloudfront에 캐싱된다.
-  //...
-}
+	//...
+	setCDNCacheHeader(res, 60); // 1분 동안 cloudfront에 캐싱된다.
+	//...
+};
 ```
 
 이 작업을 하면서 깨달음을 하나 얻었는데, 문제에 대한 해결책을 눈 앞의 틀에만 갇혀서 생각하지 않고 좀 더 거시적으로 바라봐야겠다는 것이었다. 캐싱 레이어를 CDN으로 옮기는 비교적 간단한 작업으로 유저들에게 많은 이점을 줄 수 있었는데, SSG의 최적화 자체에만 너무 매몰되어 있었던 것 같아 반성을 많이 했다.

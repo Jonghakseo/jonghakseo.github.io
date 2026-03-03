@@ -27,13 +27,13 @@ import { signal } from "@preact/signals";
 const count = signal(0); // Signal declaration
 
 function Counter() {
-  return (
-    <div>
-      <p>Count: {count}</p>
-      {/* UI updates automatically when count value changes */}
-      <button onClick={() => count.value++}>click me</button>
-    </div>
-  );
+	return (
+		<div>
+			<p>Count: {count}</p>
+			{/* UI updates automatically when count value changes */}
+			<button onClick={() => count.value++}>click me</button>
+		</div>
+	);
 }
 ```
 
@@ -44,12 +44,14 @@ import { render } from "solid-js/web";
 import { createSignal } from "solid-js";
 
 function Counter() {
-  const [count, setCount] = createSignal(0); // Signal declaration
+	const [count, setCount] = createSignal(0); // Signal declaration
 
-  setInterval(() => setCount(count() + 1), 1000);
+	setInterval(() => setCount(count() + 1), 1000);
 
-  {/* UI updates automatically when count value changes */}
-  return <div>Count: {count()}</div>;
+	{
+		/* UI updates automatically when count value changes */
+	}
+	return <div>Count: {count()}</div>;
 }
 ```
 
@@ -59,9 +61,8 @@ The signal implementation I'll use as an example in this article is [Signals](ht
 
 - 💡What is Preact?
 
-    _Preact is a UI rendering library using JSX that removes convenience and advanced features like React's reconciler and SyntheticEvent, focusing on bundle size and performance.
-    Unlike React, it strongly emphasizes bundle size savings—at version 10.19.2, its compressed size is only 4.5kb, compared to React's react(2.5kB) + react-dom(42kB), giving it a clear advantage._
-
+  _Preact is a UI rendering library using JSX that removes convenience and advanced features like React's reconciler and SyntheticEvent, focusing on bundle size and performance.
+  Unlike React, it strongly emphasizes bundle size savings—at version 10.19.2, its compressed size is only 4.5kb, compared to React's react(2.5kB) + react-dom(42kB), giving it a clear advantage._
 
 ## The Emergence of the Signal Concept
 
@@ -75,7 +76,7 @@ const count = ko.observable(0);
 const doubleCount = ko.pureComputed(() => count() * 2);
 
 // logs whenever doubleCount updates
-ko.computed(() => console.log(doubleCount()))
+ko.computed(() => console.log(doubleCount()));
 ```
 
 One problem was that (similarly to Angular.js which adopted a similar solution) this reactive state management gradually increased application complexity due to two-way data binding.
@@ -96,21 +97,21 @@ In the process of contemplating and improving state management, several state ma
 In React, state management for functional components is basically done through a hook called useState.
 
 ```jsx
-const [count, setCount] = useState(0)
+const [count, setCount] = useState(0);
 
-setCount(count+1)
+setCount(count + 1);
 ```
 
 Why do we have to manage state this way? Can't we just declare a global variable and use it?
 
 ```jsx
-let count = 0
+let count = 0;
 
-function View(){
-  const add = () => {
-    count++
-  }
-  return <button onClick={add}>{count}</button>
+function View() {
+	const add = () => {
+		count++;
+	};
+	return <button onClick={add}>{count}</button>;
 }
 ```
 
@@ -118,11 +119,10 @@ React's **functional components** must operate as **pure functions** themselves.
 
 Since all functional components are completely re-invoked during the component (function) call process commonly called rendering, state management through variables declared inside the function is impossible.
 
-- *Will the value of **count** increase when you press the button?*
+- _Will the value of **count** increase when you press the button?_
 
-    It will increase. But how can the user know that the value has increased?
-    They won't be able to see it on screen.
-
+  It will increase. But how can the user know that the value has increased?
+  They won't be able to see it on screen.
 
 All React components form a single tree connected by linked lists. This collection of nodes, commonly called the Virtual DOM, is one of React's biggest abstraction points.
 
@@ -178,12 +178,12 @@ import { signal } from "@preact/signals";
 const count = signal(0);
 
 function Counter() {
-  return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => count.value++}>click me</button>
-    </div>
-  );
+	return (
+		<div>
+			<p>Count: {count}</p>
+			<button onClick={() => count.value++}>click me</button>
+		</div>
+	);
 }
 ```
 
@@ -271,6 +271,7 @@ Those opposing signals argue that there's nothing you can't do with **useState**
 ### @preact/signals Opposition
 
 Dan Abramov also recommended against using Preact's signal implementation.
+
 > Preact Signals relies on overriding React's public API and patching React internals with unstable assumptions about how they work. This library is a completely unsupported way to use React.
 
 ## Building a Signal from Scratch

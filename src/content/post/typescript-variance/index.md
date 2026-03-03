@@ -32,9 +32,9 @@ I<T> 인스턴스를 I<T'> 형식의 변수에 할당할 수 있다.
 다음과 같은 타입 A,B,C가 있다.
 
 ```typescript
-type A = string
-type B = string | number
-type C = string | number | null
+type A = string;
+type B = string | number;
+type C = string | number | null;
 ```
 
 이제 함수 Foo라는 타입을 선언해보자.
@@ -47,19 +47,19 @@ type Foo = (b: B) => B;
 
 ```typescript
 const foo1: Foo = (a: A) => {
-  return {} as A;
+	return {} as A;
 };
 
 const foo2: Foo = (a: A) => {
-  return {} as C;
+	return {} as C;
 };
 
 const foo3: Foo = (c: C) => {
-  return {} as C;
+	return {} as C;
 };
 
 const foo4: Foo = (c: C) => {
-  return {} as A;
+	return {} as A;
 };
 ```
 
@@ -110,7 +110,7 @@ Array.push 메소드의 시그니처를 살펴보자.
 
 ```typescript
 interface Array<T> {
-    push(...items: T[]): number;
+	push(...items: T[]): number;
 }
 ```
 

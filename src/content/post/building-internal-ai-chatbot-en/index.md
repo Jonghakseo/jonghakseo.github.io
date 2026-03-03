@@ -39,30 +39,30 @@ Auth.js (formerly NextAuth) was already configured in the template, so I impleme
 
 ```ts
 export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
+	handlers: { GET, POST },
+	auth,
+	signIn,
+	signOut,
 } = NextAuth({
-  ...authConfig,
-  providers: [
-    Credentials({
-      credentials: {},
-      async authorize({ email, password }) {
-        // Verify user from DB using email and password. Sign up if not found
-      },
-    }),
-  ],
-  callbacks: {
-    async jwt({ token, user }) {
-      // Determine what information to include in the JWT
-      return token;
-    },
-    async session({ session,token }) {
-     // Determine what information to include in the session
-      return session;
-    },
-  },
+	...authConfig,
+	providers: [
+		Credentials({
+			credentials: {},
+			async authorize({ email, password }) {
+				// Verify user from DB using email and password. Sign up if not found
+			},
+		}),
+	],
+	callbacks: {
+		async jwt({ token, user }) {
+			// Determine what information to include in the JWT
+			return token;
+		},
+		async session({ session, token }) {
+			// Determine what information to include in the session
+			return session;
+		},
+	},
 });
 ```
 
@@ -127,16 +127,16 @@ The original template had OpenAI integration code using `vercel/ai` and `vercel/
 **`lib/ai/index.ts`** Original code
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { experimental_wrapLanguageModel as wrapLanguageModel } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { experimental_wrapLanguageModel as wrapLanguageModel } from "ai";
 
-import { customMiddleware } from './custom-middleware';
+import { customMiddleware } from "./custom-middleware";
 
 export const customModel = (apiIdentifier: string) => {
-  return wrapLanguageModel({
-    model: openai(apiIdentifier),
-    middleware: customMiddleware,
-  });
+	return wrapLanguageModel({
+		model: openai(apiIdentifier),
+		middleware: customMiddleware,
+	});
 };
 ```
 
@@ -145,18 +145,18 @@ This very simply implemented code had the openai function returning a highly abs
 **`lib/ai/index.ts`** Modified code
 
 ```ts
-import {createAzure} from '@ai-sdk/azure';
-import {experimental_wrapLanguageModel as wrapLanguageModel} from 'ai';
-import {customMiddleware} from './custom-middleware';
+import { createAzure } from "@ai-sdk/azure";
+import { experimental_wrapLanguageModel as wrapLanguageModel } from "ai";
+import { customMiddleware } from "./custom-middleware";
 
 const azure = createAzure({
-  baseURL: process.env.AZURE_BASE_URL
-})
+	baseURL: process.env.AZURE_BASE_URL,
+});
 export const customModel = (apiIdentifier: string) => {
-  return wrapLanguageModel({
-    model: azure(apiIdentifier),
-    middleware: customMiddleware,
-  });
+	return wrapLanguageModel({
+		model: azure(apiIdentifier),
+		middleware: customMiddleware,
+	});
 };
 ```
 
@@ -358,76 +358,90 @@ Building on this, we restricted the execution environment to a worker and receiv
 
 ```ts
 function safeEval(untrustedCode: string) {
-  return new Promise((resolve, reject) => {
-    const blobURL = URL.createObjectURL(
-      new Blob(
-        [
-          '(',
-          function () {
-            const messages: any[] = [];
-            const _postMessage = postMessage;
-            const _addEventListener = addEventListener;
+	return new Promise((resolve, reject) => {
+		const blobURL = URL.createObjectURL(
+			new Blob(
+				[
+					"(",
+					function () {
+						const messages: any[] = [];
+						const _postMessage = postMessage;
+						const _addEventListener = addEventListener;
 
-            ((obj) => {
-              let current = obj;
-              const keepProperties = [
-                'Object', 'Function', 'Infinity', 'NaN', 'undefined',
-                'caches', 'TEMPORARY', 'PERSISTENT',
-                'Array', 'Boolean', 'Number', 'String', 'Symbol',
-                'Map', 'Math', 'Set', 'JSON', 'console',
-              ];
+						((obj) => {
+							let current = obj;
+							const keepProperties = [
+								"Object",
+								"Function",
+								"Infinity",
+								"NaN",
+								"undefined",
+								"caches",
+								"TEMPORARY",
+								"PERSISTENT",
+								"Array",
+								"Boolean",
+								"Number",
+								"String",
+								"Symbol",
+								"Map",
+								"Math",
+								"Set",
+								"JSON",
+								"console",
+							];
 
-              do {
-                Object.getOwnPropertyNames(current).forEach((name) => {
-                  if (name === 'console') {
-                    current.console = {
-                      log: (...args: any[]) => {
-                        messages.push({ type: 'log', data: JSON.stringify(Array.from(args)) });
-                      },
-                      error: (...args: any[]) => {
-                        messages.push({ type: 'error', data: JSON.stringify(Array.from(args)) });
-                      },
-                    };
-                  }
-                  if (keepProperties.indexOf(name) === -1) {
-                    delete current[name];
-                  }
-                });
-                current = Object.getPrototypeOf(current);
-              } while (current !== Object.prototype);
-              // @ts-expect-error - self is not defined
-            })(this);
+							do {
+								Object.getOwnPropertyNames(current).forEach((name) => {
+									if (name === "console") {
+										current.console = {
+											log: (...args: any[]) => {
+												messages.push({ type: "log", data: JSON.stringify(Array.from(args)) });
+											},
+											error: (...args: any[]) => {
+												messages.push({ type: "error", data: JSON.stringify(Array.from(args)) });
+											},
+										};
+									}
+									if (keepProperties.indexOf(name) === -1) {
+										delete current[name];
+									}
+								});
+								current = Object.getPrototypeOf(current);
+							} while (current !== Object.prototype);
+							// @ts-expect-error - self is not defined
+						})(this);
 
-            _addEventListener('message', (e) => {
-              new Function('', `{${e.data}\n};`)();
-              _postMessage(JSON.stringify(messages));
-            });
-          }.toString(),
-          ')()',
-        ],
-        { type: 'application/javascript' },
-      ),
-    );
+						_addEventListener("message", (e) => {
+							new Function("", `{${e.data}\n};`)();
+							_postMessage(JSON.stringify(messages));
+						});
+					}.toString(),
+					")()",
+				],
+				{ type: "application/javascript" },
+			),
+		);
 
-    const worker = new Worker(blobURL);
-    URL.revokeObjectURL(blobURL);
+		const worker = new Worker(blobURL);
+		URL.revokeObjectURL(blobURL);
 
-    worker.onmessage = (evt) => {
-      worker.terminate();
-      resolve(JSON.parse(evt.data));
-    };
+		worker.onmessage = (evt) => {
+			worker.terminate();
+			resolve(JSON.parse(evt.data));
+		};
 
-    worker.onerror = (evt) => {
-      reject(new Error(evt.message));
-    };
+		worker.onerror = (evt) => {
+			reject(new Error(evt.message));
+		};
 
-    worker.postMessage(untrustedCode);
+		worker.postMessage(untrustedCode);
 
-    setTimeout(() => {
-      worker.terminate();
-      reject(new Error('The worker timed out.'));
-    }, 2000);
-  });
+		setTimeout(() => {
+			worker.terminate();
+			reject(new Error("The worker timed out."));
+		}, 2000);
+	});
 }
 ```
 
@@ -445,21 +459,21 @@ To solve this, we added a layer that converts attached files into text-format me
 
 ```ts
 const getContentByMimeType = async () => {
-  switch (content.mimeType) {
-    case 'application/pdf':
-      return pdfToText(url);
-    case 'text/csv':
-    case 'text/plain':
-    case 'text/html':
-      return fetchAsText(url);
-    case 'application/msword':
-    case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-    case 'application/vnd.ms-excel':
-    case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-      return officeToText(url);
-    default:
-      return 'Unsupported file type';
-  }
+	switch (content.mimeType) {
+		case "application/pdf":
+			return pdfToText(url);
+		case "text/csv":
+		case "text/plain":
+		case "text/html":
+			return fetchAsText(url);
+		case "application/msword":
+		case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+		case "application/vnd.ms-excel":
+		case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+			return officeToText(url);
+		default:
+			return "Unsupported file type";
+	}
 };
 ```
 
@@ -506,15 +520,15 @@ For sanitization, we used [dompurify](https://www.npmjs.com/package/dompurify) +
 
 ```ts
 function cleanHTML(dirty: string) {
-  return purify.sanitize(dirty, {
-    ALLOWED_TAGS: [
-      //...
-    ],
-    ALLOWED_ATTR: ['href', 'title', 'alt'],
-    ALLOW_DATA_ATTR: false,
-    ALLOW_ARIA_ATTR: false,
-    ALLOW_SELF_CLOSE_IN_ATTR: false,
-  });
+	return purify.sanitize(dirty, {
+		ALLOWED_TAGS: [
+			//...
+		],
+		ALLOWED_ATTR: ["href", "title", "alt"],
+		ALLOW_DATA_ATTR: false,
+		ALLOW_ARIA_ATTR: false,
+		ALLOW_SELF_CLOSE_IN_ATTR: false,
+	});
 }
 ```
 
@@ -557,19 +571,19 @@ We also used [locate-chrome](https://www.npmjs.com/package/locate-chrome) to pas
 
 ```ts
 async function preparePuppeteer() {
-  if (puppeteer.current?.connected) {
-    return;
-  }
-  await puppeteer.current?.close();
-  puppeteer.current = null;
+	if (puppeteer.current?.connected) {
+		return;
+	}
+	await puppeteer.current?.close();
+	puppeteer.current = null;
 
-  const executablePath: string =
-    (await new Promise((resolve) => locateChrome(resolve))) || '/usr/bin/google-chrome';
+	const executablePath: string =
+		(await new Promise((resolve) => locateChrome(resolve))) || "/usr/bin/google-chrome";
 
-  puppeteer.current = await launch({
-    executablePath,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
+	puppeteer.current = await launch({
+		executablePath,
+		args: ["--no-sandbox", "--disable-setuid-sandbox"],
+	});
 }
 ```
 

@@ -30,7 +30,12 @@ const headingsJson = JSON.stringify(headings);
 	<head>
 		<meta name="robots" content="noindex, nofollow" />
 	</head>
-	<body data-translation-quality={quality} data-translation-title={entry.data.title} data-translation-description={entry.data.description} data-translation-toc={headingsJson}>
+	<body
+		data-translation-quality={quality}
+		data-translation-title={entry.data.title}
+		data-translation-description={entry.data.description}
+		data-translation-toc={headingsJson}
+	>
 		<Content />
 	</body>
 </html>

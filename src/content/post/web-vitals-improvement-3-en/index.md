@@ -35,29 +35,29 @@ Just as we added s-maxage to the Cache-Control header in SSR responses for CDN c
 
 ```ts
 export const setCDNCacheHeader = (
-  res: ServerResponse,
-  sMaxAge: number,
-  staleWhileRevalidate?: number,
+	res: ServerResponse,
+	sMaxAge: number,
+	staleWhileRevalidate?: number,
 ) => {
-  // Requests within 1 second use cache, after that CDN cache kicks in.
-  // This avoids issues from disk caching and delegates content freshness to CDN.
-  const cacheValue = [];
-  cacheValue.push('public');
-  cacheValue.push(`max-age=1`);
-  cacheValue.push(`s-maxage=${sMaxAge}`);
-  if (staleWhileRevalidate) {
-    cacheValue.push(`stale-while-revalidate=${staleWhileRevalidate}`);
-  }
-  res.setHeader('Cache-Control', cacheValue.join(', '));
+	// Requests within 1 second use cache, after that CDN cache kicks in.
+	// This avoids issues from disk caching and delegates content freshness to CDN.
+	const cacheValue = [];
+	cacheValue.push("public");
+	cacheValue.push(`max-age=1`);
+	cacheValue.push(`s-maxage=${sMaxAge}`);
+	if (staleWhileRevalidate) {
+		cacheValue.push(`stale-while-revalidate=${staleWhileRevalidate}`);
+	}
+	res.setHeader("Cache-Control", cacheValue.join(", "));
 };
 
 //...
 
 // Inside getServerSideProps
 setCDNCacheHeader(
-  res,
-  REVALIDATE_INTERVAL_SECONDS.THIRTY_MINUTES, // 30 minutes
-  STALE_WHILE_REVALIDATE_SECONDS.ONE_WEEK, // 1 week
+	res,
+	REVALIDATE_INTERVAL_SECONDS.THIRTY_MINUTES, // 30 minutes
+	STALE_WHILE_REVALIDATE_SECONDS.ONE_WEEK, // 1 week
 );
 ```
 

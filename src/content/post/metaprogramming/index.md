@@ -14,7 +14,6 @@ translationSlug: "metaprogramming-ko"
 To understand the concept of metaprogramming, we must first understand the word "meta".
 Where does the word meta come from, which we are somewhat familiar with through the term metacognition?
 
-
 **Meta** is an English word derived from the Greek, meaning 'about' or 'beyond' and refers to the abstraction and reflection on an object or concept at a higher level.
 In other words, metadata is data about data, and metacognition is cognition about cognition.
 
@@ -78,13 +77,13 @@ Another difference is that Reflect.has also allows you to detect properties that
 
 ```javascript
 const x = {
-  y: 0
-}
+	y: 0,
+};
 // x has no property named 'toString' but it exists in the prototype chain
 Reflect.has(x, "toString"); // true
 x.hasOwnProperty("toString"); // false
 
-!!x['toString'] // true
+!!x["toString"]; // true
 ```
 
 "I can just validate it with x["toString"]!"
@@ -94,19 +93,21 @@ But as they say, metaprogramming isn't about checking the results of your execut
 Let's look at a slightly different example.
 
 ```javascript
-let y = 0
+let y = 0;
 
 const x = {
-  get y(){ return ++y }
-}
+	get y() {
+		return ++y;
+	},
+};
 
-x.y;                  // 1
-Reflect.has(x, "y");  // true
-x.y                   // 2
-!!x["y"]              // true
-x.y                   // 4
-x.hasOwnProperty("y") // true
-x.y                   // 5
+x.y; // 1
+Reflect.has(x, "y"); // true
+x.y; // 2
+!!x["y"]; // true
+x.y; // 4
+x.hasOwnProperty("y"); // true
+x.y; // 5
 ```
 
 I've made the return value increment with the number of times an object x accesses y.
@@ -122,8 +123,8 @@ So,
 
 These are three very different things.
 
-
 ### Proxy
+
 A proxy is a concept that is often mentioned in programming, and is familiar from the design pattern, the proxy pattern.
 It is a pattern used to intercept or change the behaviour of a real object before accessing it, often for caching or validation purposes.
 
@@ -139,14 +140,14 @@ In JavaScript, you can create proxy objects with the Proxy constructor, and then
 
 ```javascript
 const target = {
-  message1: "hello",
-  message2: "everyone",
+	message1: "hello",
+	message2: "everyone",
 };
 
 const handler = {
-  get(target, prop, receiver) {
-    return "world";
-  },
+	get(target, prop, receiver) {
+		return "world";
+	},
 };
 
 const proxy = new Proxy(target, handler);
@@ -169,17 +170,17 @@ For example, you can use a proxy to validate the behaviour of an object.
 
 ```javascript
 const target = {
-  message1: "hello",
-  message2: "everyone",
+	message1: "hello",
+	message2: "everyone",
 };
 
 const handler = {
-  get(target, prop, receiver) {
-    if (!Reflect.has(prop)) {
-      throw new Error("Property does not exist");
-    }
-    return Reflect.get(...arguments);
-  },
+	get(target, prop, receiver) {
+		if (!Reflect.has(prop)) {
+			throw new Error("Property does not exist");
+		}
+		return Reflect.get(...arguments);
+	},
 };
 
 const strictTarget = new Proxy(target, handler);
@@ -199,24 +200,24 @@ For example, you can use a proxy to cache the behaviour of an object.
 const cache = new Map();
 
 const _fibonacci = (n) => {
-  if (n <= 1) {
-    return 1;
-  }
-  return fibonacci(n - 1) + fibonacci(n - 2);
+	if (n <= 1) {
+		return 1;
+	}
+	return fibonacci(n - 1) + fibonacci(n - 2);
 };
 
 const handler = {
-  apply: (target, thisArg, args) => {
-    const [num] = args;
-    if (cache.has(num)) {
-      return cache.get(num);
-    }
-    const result = Reflect.apply(target, thisArg, args);
-    cache.set(num, result);
+	apply: (target, thisArg, args) => {
+		const [num] = args;
+		if (cache.has(num)) {
+			return cache.get(num);
+		}
+		const result = Reflect.apply(target, thisArg, args);
+		cache.set(num, result);
 
-    return result;
-  }
-}
+		return result;
+	},
+};
 
 const fibonacci = new Proxy(_fibonacci, handler);
 
@@ -231,7 +232,6 @@ In the above example, we created a proxy object that caches the result of the fi
 
 Metaprogramming refers to the way a program checks and modifies itself, and in JavaScript, this is done primarily through reflection or proxies.
 Understanding it and using it properly can make you more productive and flexible.
-
 
 ## References
 

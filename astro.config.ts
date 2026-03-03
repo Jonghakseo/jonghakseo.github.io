@@ -7,6 +7,7 @@ import icon from "astro-icon";
 import remarkUnwrapImages from "remark-unwrap-images";
 // @ts-ignore:next-line
 import { remarkReadingTime } from "./src/utils/remark-reading-time.mjs";
+import { visit } from "unist-util-visit";
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,6 +16,7 @@ export default defineConfig({
 	prefetch: true,
 	markdown: {
 		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
+		rehypePlugins: [rehypeImageOptimization],
 		remarkRehype: { footnoteLabelProperties: { className: [""] } },
 		shikiConfig: {
 			theme: "dracula",
@@ -32,7 +34,7 @@ export default defineConfig({
 		icon(),
 	],
 	vite: {
-		plugins: [rawFonts([".ttf"])],
+		plugins: [rawFonts([".ttf", ".woff"])],
 		optimizeDeps: {
 			exclude: ["@resvg/resvg-js"],
 		},
@@ -52,5 +54,21 @@ function rawFonts(ext: Array<string>) {
 				};
 			}
 		},
+	};
+}
+
+// Rehype plugin to add loading="lazy" and decoding="async" to all img elements
+function rehypeImageOptimization() {
+	return (tree: any) => {
+		visit(tree, "element", (node) => {
+			if (node.tagName === "img") {
+				if (!node.properties.loading) {
+					node.properties.loading = "lazy";
+				}
+				if (!node.properties.decoding) {
+					node.properties.decoding = "async";
+				}
+			}
+		});
 	};
 }

@@ -29,18 +29,18 @@ We ripped out all SSG, added cache headers (s-maxage) for CloudFront caching, an
 
 ```ts
 export const setCDNCacheHeader = (res: ServerResponse, maxAge: number) => {
-  // Requests within 1 second use local cache, after that CDN cache kicks in.
-  // This avoids issues from local caching and delegates content freshness to CDN.
-  res.setHeader('Cache-Control', `public, max-age=1, s-maxage=${sMaxAge}`);
+	// Requests within 1 second use local cache, after that CDN cache kicks in.
+	// This avoids issues from local caching and delegates content freshness to CDN.
+	res.setHeader("Cache-Control", `public, max-age=1, s-maxage=${sMaxAge}`);
 };
 
 //...
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  //...
-  setCDNCacheHeader(res, 60); // Cached in CloudFront for 1 minute.
-  //...
-}
+	//...
+	setCDNCacheHeader(res, 60); // Cached in CloudFront for 1 minute.
+	//...
+};
 ```
 
 This work taught me an important lesson: don't get trapped in the framework right in front of you when thinking about solutions to problems — step back and look at the bigger picture. A relatively simple task of moving the caching layer to CDN provided tremendous benefits to users, yet I had been too fixated on optimizing SSG itself. It was a moment of deep reflection.

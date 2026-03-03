@@ -39,30 +39,30 @@ Auth.js(구 NextAuth)의 기본적인 구성은 이미 되어있는 상태였기
 
 ```ts
 export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
+	handlers: { GET, POST },
+	auth,
+	signIn,
+	signOut,
 } = NextAuth({
-  ...authConfig,
-  providers: [
-    Credentials({
-      credentials: {},
-      async authorize({ email, password }) {
-        // 이메일과 패스워드를 통해 DB에서 유저 확인. 없으면 회원가입 처리
-      },
-    }),
-  ],
-  callbacks: {
-    async jwt({ token, user }) {
-      // jwt 내부에 어떤 정보를 담을지 결정
-      return token;
-    },
-    async session({ session,token }) {
-     // session에 어떤 정보를 담을지 결정
-      return session;
-    },
-  },
+	...authConfig,
+	providers: [
+		Credentials({
+			credentials: {},
+			async authorize({ email, password }) {
+				// 이메일과 패스워드를 통해 DB에서 유저 확인. 없으면 회원가입 처리
+			},
+		}),
+	],
+	callbacks: {
+		async jwt({ token, user }) {
+			// jwt 내부에 어떤 정보를 담을지 결정
+			return token;
+		},
+		async session({ session, token }) {
+			// session에 어떤 정보를 담을지 결정
+			return session;
+		},
+	},
 });
 ```
 
@@ -127,16 +127,16 @@ export const {
 **`lib/ai/index.ts`** 기존 코드
 
 ```ts
-import { openai } from '@ai-sdk/openai';
-import { experimental_wrapLanguageModel as wrapLanguageModel } from 'ai';
+import { openai } from "@ai-sdk/openai";
+import { experimental_wrapLanguageModel as wrapLanguageModel } from "ai";
 
-import { customMiddleware } from './custom-middleware';
+import { customMiddleware } from "./custom-middleware";
 
 export const customModel = (apiIdentifier: string) => {
-  return wrapLanguageModel({
-    model: openai(apiIdentifier),
-    middleware: customMiddleware,
-  });
+	return wrapLanguageModel({
+		model: openai(apiIdentifier),
+		middleware: customMiddleware,
+	});
 };
 ```
 
@@ -145,18 +145,18 @@ export const customModel = (apiIdentifier: string) => {
 **`lib/ai/index.ts`** 변경 코드
 
 ```ts
-import {createAzure} from '@ai-sdk/azure';
-import {experimental_wrapLanguageModel as wrapLanguageModel} from 'ai';
-import {customMiddleware} from './custom-middleware';
+import { createAzure } from "@ai-sdk/azure";
+import { experimental_wrapLanguageModel as wrapLanguageModel } from "ai";
+import { customMiddleware } from "./custom-middleware";
 
 const azure = createAzure({
-  baseURL: process.env.AZURE_BASE_URL
-})
+	baseURL: process.env.AZURE_BASE_URL,
+});
 export const customModel = (apiIdentifier: string) => {
-  return wrapLanguageModel({
-    model: azure(apiIdentifier),
-    middleware: customMiddleware,
-  });
+	return wrapLanguageModel({
+		model: azure(apiIdentifier),
+		middleware: customMiddleware,
+	});
 };
 ```
 
@@ -360,76 +360,90 @@ excute(); // hello world
 
 ```ts
 function safeEval(untrustedCode: string) {
-  return new Promise((resolve, reject) => {
-    const blobURL = URL.createObjectURL(
-      new Blob(
-        [
-          '(',
-          function () {
-            const messages: any[] = [];
-            const _postMessage = postMessage;
-            const _addEventListener = addEventListener;
+	return new Promise((resolve, reject) => {
+		const blobURL = URL.createObjectURL(
+			new Blob(
+				[
+					"(",
+					function () {
+						const messages: any[] = [];
+						const _postMessage = postMessage;
+						const _addEventListener = addEventListener;
 
-            ((obj) => {
-              let current = obj;
-              const keepProperties = [
-                'Object', 'Function', 'Infinity', 'NaN', 'undefined',
-                'caches', 'TEMPORARY', 'PERSISTENT',
-                'Array', 'Boolean', 'Number', 'String', 'Symbol',
-                'Map', 'Math', 'Set', 'JSON', 'console',
-              ];
+						((obj) => {
+							let current = obj;
+							const keepProperties = [
+								"Object",
+								"Function",
+								"Infinity",
+								"NaN",
+								"undefined",
+								"caches",
+								"TEMPORARY",
+								"PERSISTENT",
+								"Array",
+								"Boolean",
+								"Number",
+								"String",
+								"Symbol",
+								"Map",
+								"Math",
+								"Set",
+								"JSON",
+								"console",
+							];
 
-              do {
-                Object.getOwnPropertyNames(current).forEach((name) => {
-                  if (name === 'console') {
-                    current.console = {
-                      log: (...args: any[]) => {
-                        messages.push({ type: 'log', data: JSON.stringify(Array.from(args)) });
-                      },
-                      error: (...args: any[]) => {
-                        messages.push({ type: 'error', data: JSON.stringify(Array.from(args)) });
-                      },
-                    };
-                  }
-                  if (keepProperties.indexOf(name) === -1) {
-                    delete current[name];
-                  }
-                });
-                current = Object.getPrototypeOf(current);
-              } while (current !== Object.prototype);
-              // @ts-expect-error - self is not defined
-            })(this);
+							do {
+								Object.getOwnPropertyNames(current).forEach((name) => {
+									if (name === "console") {
+										current.console = {
+											log: (...args: any[]) => {
+												messages.push({ type: "log", data: JSON.stringify(Array.from(args)) });
+											},
+											error: (...args: any[]) => {
+												messages.push({ type: "error", data: JSON.stringify(Array.from(args)) });
+											},
+										};
+									}
+									if (keepProperties.indexOf(name) === -1) {
+										delete current[name];
+									}
+								});
+								current = Object.getPrototypeOf(current);
+							} while (current !== Object.prototype);
+							// @ts-expect-error - self is not defined
+						})(this);
 
-            _addEventListener('message', (e) => {
-              new Function('', `{${e.data}\n};`)();
-              _postMessage(JSON.stringify(messages));
-            });
-          }.toString(),
-          ')()',
-        ],
-        { type: 'application/javascript' },
-      ),
-    );
+						_addEventListener("message", (e) => {
+							new Function("", `{${e.data}\n};`)();
+							_postMessage(JSON.stringify(messages));
+						});
+					}.toString(),
+					")()",
+				],
+				{ type: "application/javascript" },
+			),
+		);
 
-    const worker = new Worker(blobURL);
-    URL.revokeObjectURL(blobURL);
+		const worker = new Worker(blobURL);
+		URL.revokeObjectURL(blobURL);
 
-    worker.onmessage = (evt) => {
-      worker.terminate();
-      resolve(JSON.parse(evt.data));
-    };
+		worker.onmessage = (evt) => {
+			worker.terminate();
+			resolve(JSON.parse(evt.data));
+		};
 
-    worker.onerror = (evt) => {
-      reject(new Error(evt.message));
-    };
+		worker.onerror = (evt) => {
+			reject(new Error(evt.message));
+		};
 
-    worker.postMessage(untrustedCode);
+		worker.postMessage(untrustedCode);
 
-    setTimeout(() => {
-      worker.terminate();
-      reject(new Error('The worker timed out.'));
-    }, 2000);
-  });
+		setTimeout(() => {
+			worker.terminate();
+			reject(new Error("The worker timed out."));
+		}, 2000);
+	});
 }
 ```
 
@@ -447,21 +461,21 @@ function safeEval(untrustedCode: string) {
 
 ```ts
 const getContentByMimeType = async () => {
-  switch (content.mimeType) {
-    case 'application/pdf':
-      return pdfToText(url);
-    case 'text/csv':
-    case 'text/plain':
-    case 'text/html':
-      return fetchAsText(url);
-    case 'application/msword':
-    case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-    case 'application/vnd.ms-excel':
-    case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-      return officeToText(url);
-    default:
-      return 'Unsupported file type';
-  }
+	switch (content.mimeType) {
+		case "application/pdf":
+			return pdfToText(url);
+		case "text/csv":
+		case "text/plain":
+		case "text/html":
+			return fetchAsText(url);
+		case "application/msword":
+		case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+		case "application/vnd.ms-excel":
+		case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+			return officeToText(url);
+		default:
+			return "Unsupported file type";
+	}
 };
 ```
 
@@ -508,15 +522,15 @@ sanitize기능 구현을 위해 [dompurify](https://www.npmjs.com/package/dompur
 
 ```ts
 function cleanHTML(dirty: string) {
-  return purify.sanitize(dirty, {
-    ALLOWED_TAGS: [
-      //...
-    ],
-    ALLOWED_ATTR: ['href', 'title', 'alt'],
-    ALLOW_DATA_ATTR: false,
-    ALLOW_ARIA_ATTR: false,
-    ALLOW_SELF_CLOSE_IN_ATTR: false,
-  });
+	return purify.sanitize(dirty, {
+		ALLOWED_TAGS: [
+			//...
+		],
+		ALLOWED_ATTR: ["href", "title", "alt"],
+		ALLOW_DATA_ATTR: false,
+		ALLOW_ARIA_ATTR: false,
+		ALLOW_SELF_CLOSE_IN_ATTR: false,
+	});
 }
 ```
 
@@ -559,19 +573,19 @@ ENTRYPOINT ["pnpm", "start"]
 
 ```ts
 async function preparePuppeteer() {
-  if (puppeteer.current?.connected) {
-    return;
-  }
-  await puppeteer.current?.close();
-  puppeteer.current = null;
+	if (puppeteer.current?.connected) {
+		return;
+	}
+	await puppeteer.current?.close();
+	puppeteer.current = null;
 
-  const executablePath: string =
-    (await new Promise((resolve) => locateChrome(resolve))) || '/usr/bin/google-chrome';
+	const executablePath: string =
+		(await new Promise((resolve) => locateChrome(resolve))) || "/usr/bin/google-chrome";
 
-  puppeteer.current = await launch({
-    executablePath,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
+	puppeteer.current = await launch({
+		executablePath,
+		args: ["--no-sandbox", "--disable-setuid-sandbox"],
+	});
 }
 ```
 

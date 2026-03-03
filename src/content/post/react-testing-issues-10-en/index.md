@@ -8,6 +8,7 @@ translationQuality: "draft"
 ---
 
 The testing environment is as follows:
+
 - jest (27.0.6 -> 28.1.3)
 - jsdom (16.6.0 -> 19.0.0)
 - @testing-library/react (12.0.0)
@@ -99,25 +100,30 @@ In cases like this, you can query the component by creating custom query selecto
 https://testing-library.com/docs/react-testing-library/setup/#add-custom-queries
 
 ```typescript
-import { buildQueries } from '@testing-library/react';
+import { buildQueries } from "@testing-library/react";
 
-const ANTD_SELECT_PLACEHOLDER_CLASS_NAME = 'ant-select-selection-placeholder' as const;
+const ANTD_SELECT_PLACEHOLDER_CLASS_NAME = "ant-select-selection-placeholder" as const;
 
-const queryAllByAntdSelectPlaceholder = (container: HTMLElement, placeholder: string): HTMLElement[] => {
-  const selectPlaceHolders = container.getElementsByClassName(ANTD_SELECT_PLACEHOLDER_CLASS_NAME);
-  return Array.from(selectPlaceHolders).filter(
-    selectPlaceHolder => selectPlaceHolder.textContent === placeholder,
-  ) as HTMLElement[];
+const queryAllByAntdSelectPlaceholder = (
+	container: HTMLElement,
+	placeholder: string,
+): HTMLElement[] => {
+	const selectPlaceHolders = container.getElementsByClassName(ANTD_SELECT_PLACEHOLDER_CLASS_NAME);
+	return Array.from(selectPlaceHolders).filter(
+		(selectPlaceHolder) => selectPlaceHolder.textContent === placeholder,
+	) as HTMLElement[];
 };
-const getMultipleError = (container: Element | null, placeHolder: string) => `Found multiple elements: ${placeHolder}`;
-const getMissingError = (container: Element | null, placeHolder: string) => `Unable to find an element: ${placeHolder}`;
+const getMultipleError = (container: Element | null, placeHolder: string) =>
+	`Found multiple elements: ${placeHolder}`;
+const getMissingError = (container: Element | null, placeHolder: string) =>
+	`Unable to find an element: ${placeHolder}`;
 
 const [
-  queryByAntdSelectPlaceholder,
-  getAllByAntdSelectPlaceholder,
-  getByAntdSelectPlaceholder,
-  findAllByAntdSelectPlaceholder,
-  findByAntdSelectPlaceholder,
+	queryByAntdSelectPlaceholder,
+	getAllByAntdSelectPlaceholder,
+	getByAntdSelectPlaceholder,
+	findAllByAntdSelectPlaceholder,
+	findByAntdSelectPlaceholder,
 ] = buildQueries(queryAllByAntdSelectPlaceholder, getMultipleError, getMissingError);
 ```
 
@@ -148,30 +154,30 @@ This issue arose from using **removeOtherMediaQueryDisplay**, which was discusse
 When **removeOtherMediaQueryDisplay** is called within the render method, or when you directly call **element.remove** to delete an element, re-rendering that element through state changes causes an error.
 
 ```tsx
-test('error test', () => {
-  // given
-  const Usage = () => {
-    const [visible, setVisible] = useState(true);
-    return (
-      <>
-        <input onChange={() => setVisible(false)} />
-        {visible && <div id="removed-element" />}
-      </>
-    );
-  };
-  // when
-  render(<Usage />);
+test("error test", () => {
+	// given
+	const Usage = () => {
+		const [visible, setVisible] = useState(true);
+		return (
+			<>
+				<input onChange={() => setVisible(false)} />
+				{visible && <div id="removed-element" />}
+			</>
+		);
+	};
+	// when
+	render(<Usage />);
 
-  // Removing a conditionally rendered element after rendering
-  document.body.querySelector('#removed-element')?.remove();
+	// Removing a conditionally rendered element after rendering
+	document.body.querySelector("#removed-element")?.remove();
 
-  // then
-  const input = screen.getByRole('textbox');
-  // NotFoundError: The node to be removed is not a child of this node.
-  fireEvent.change(input, { target: { value: '1' } });
-  // or
-  userEvent.type(input, '1'); 
-  // Note: unlike fireEvent, userEvent only outputs this error as console.error without throwing, so extra caution is needed.
+	// then
+	const input = screen.getByRole("textbox");
+	// NotFoundError: The node to be removed is not a child of this node.
+	fireEvent.change(input, { target: { value: "1" } });
+	// or
+	userEvent.type(input, "1");
+	// Note: unlike fireEvent, userEvent only outputs this error as console.error without throwing, so extra caution is needed.
 });
 ```
 
@@ -200,26 +206,26 @@ This false positive caused issues to slip through testing and reach production, 
 Here's an example of a test that shouldn't have been passing:
 
 ```tsx
-test('test that should not pass' , () => {
-     // given
-      const onSubmit = jest.fn();
-      const onInvalid = jest.fn();
+test("test that should not pass", () => {
+	// given
+	const onSubmit = jest.fn();
+	const onInvalid = jest.fn();
 
-      // when
-      render(
-        <form onSubmit={onSubmit} onInvalid={onInvalid}>
-          <Input required validate />
-          <input required />
-          <RequiredFieldValidator hasValue={false} message="error" />
-          <button />
-        </form>,
-      );
+	// when
+	render(
+		<form onSubmit={onSubmit} onInvalid={onInvalid}>
+			<Input required validate />
+			<input required />
+			<RequiredFieldValidator hasValue={false} message="error" />
+			<button />
+		</form>,
+	);
 
-      userEvent.click(screen.getByRole('button'));
+	userEvent.click(screen.getByRole("button"));
 
-      // then
-      expect(onSubmit).toBeCalled();
-      expect(onInvalid).not.toBeCalled();
+	// then
+	expect(onSubmit).toBeCalled();
+	expect(onInvalid).not.toBeCalled();
 });
 ```
 
@@ -270,7 +276,7 @@ Therefore, we had to wrap the check with waitFor:
 
 ```typescript
 await waitFor(() => {
-  expect(thumbnail.getAttribute('src')).toContain(mockData.ImageUrl);
+	expect(thumbnail.getAttribute("src")).toContain(mockData.ImageUrl);
 });
 ```
 
@@ -301,7 +307,7 @@ https://testing-library.com/docs/queries/about/#priority
 byRole is typically used like this:
 
 ```typescript
-getByRole('button', {name: "Submit" });
+getByRole("button", { name: "Submit" });
 ```
 
 Since there can be multiple buttons within a component, we pass the actually displayed text "Submit" to the name property of the second argument to identify the specific button we want to test.
@@ -335,7 +341,7 @@ However, even with a rough understanding of these rules, you'll occasionally fin
 render(<li>list</li>);
 
 // then
-screen.getByRole('listitem', { name: 'list' });
+screen.getByRole("listitem", { name: "list" });
 ```
 
 Looking up related issues leads to this document:

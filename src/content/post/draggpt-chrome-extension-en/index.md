@@ -50,7 +50,7 @@ I built a POC that selected text and sent it to ChatGPT with pre-configured prom
 
 ![Getting to this point took about 4 hours](../draggpt-chrome-extension/img4.jpg)
 
-After using it myself, I was convinced it could be useful. It was something *I'd* personally find handy, so over the next few days I added several features:
+After using it myself, I was convinced it could be useful. It was something _I'd_ personally find handy, so over the next few days I added several features:
 
 1. Continue the conversation from a response (e.g., "Summarize this in one line," "Translate this")
 2. Quick chat without pre-configured prompts

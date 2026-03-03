@@ -18,18 +18,12 @@ https://github.com/apollographql/apollo-client/blob/v3.11.8/src/react/hooks/useQ
 https://github.com/apollographql/apollo-client/blob/v3.11.8/src/react/hooks/useQuery.ts#L155
 
 ```ts
-function _useQuery<
-  TData = any,
-  TVariables extends OperationVariables = OperationVariables,
->(
-  query: DocumentNode | TypedDocumentNode<TData, TVariables>,
-  options: QueryHookOptions<NoInfer<TData>, NoInfer<TVariables>>
+function _useQuery<TData = any, TVariables extends OperationVariables = OperationVariables>(
+	query: DocumentNode | TypedDocumentNode<TData, TVariables>,
+	options: QueryHookOptions<NoInfer<TData>, NoInfer<TVariables>>,
 ) {
-  const { result, obsQueryFields } = useQueryInternals(query, options);
-  return React.useMemo(
-    () => ({ ...result, ...obsQueryFields }),
-    [result, obsQueryFields]
-  );
+	const { result, obsQueryFields } = useQueryInternals(query, options);
+	return React.useMemo(() => ({ ...result, ...obsQueryFields }), [result, obsQueryFields]);
 }
 ```
 
@@ -39,75 +33,71 @@ We can see that the useQuery hook is a wrapper around the `_useQuery` implementa
 
 ```ts
 export function useQueryInternals<
-  TData = any,
-  TVariables extends OperationVariables = OperationVariables,
+	TData = any,
+	TVariables extends OperationVariables = OperationVariables,
 >(
-  query: DocumentNode | TypedDocumentNode<TData, TVariables>,
-  options: QueryHookOptions<NoInfer<TData>, NoInfer<TVariables>>
+	query: DocumentNode | TypedDocumentNode<TData, TVariables>,
+	options: QueryHookOptions<NoInfer<TData>, NoInfer<TVariables>>,
 ) {
-  const client = useApolloClient(options.client);
+	const client = useApolloClient(options.client);
 
-  const renderPromises = React.useContext(getApolloContext()).renderPromises;
-  const isSyncSSR = !!renderPromises;
-  const disableNetworkFetches = client.disableNetworkFetches;
-  const ssrAllowed = options.ssr !== false && !options.skip;
-  const partialRefetch = options.partialRefetch;
+	const renderPromises = React.useContext(getApolloContext()).renderPromises;
+	const isSyncSSR = !!renderPromises;
+	const disableNetworkFetches = client.disableNetworkFetches;
+	const ssrAllowed = options.ssr !== false && !options.skip;
+	const partialRefetch = options.partialRefetch;
 
-  const makeWatchQueryOptions = createMakeWatchQueryOptions(
-    client,
-    query,
-    options,
-    isSyncSSR
-  );
+	const makeWatchQueryOptions = createMakeWatchQueryOptions(client, query, options, isSyncSSR);
 
-  const [{ observable, resultData }, onQueryExecuted] = useInternalState(
-    client,
-    query,
-    options,
-    renderPromises,
-    makeWatchQueryOptions
-  );
+	const [{ observable, resultData }, onQueryExecuted] = useInternalState(
+		client,
+		query,
+		options,
+		renderPromises,
+		makeWatchQueryOptions,
+	);
 
-  const watchQueryOptions: Readonly<WatchQueryOptions<TVariables, TData>> =
-    makeWatchQueryOptions(observable);
+	const watchQueryOptions: Readonly<WatchQueryOptions<TVariables, TData>> =
+		makeWatchQueryOptions(observable);
 
-  useResubscribeIfNecessary<TData, TVariables>(
-    resultData,
-    observable,
-    client,
-    options,
-    watchQueryOptions
-  );
+	useResubscribeIfNecessary<TData, TVariables>(
+		resultData,
+		observable,
+		client,
+		options,
+		watchQueryOptions,
+	);
 
-  const obsQueryFields = React.useMemo<
-    Omit<ObservableQueryFields<TData, TVariables>, "variables">
-  >(() => bindObservableMethods(observable), [observable]);
+	const obsQueryFields = React.useMemo<Omit<ObservableQueryFields<TData, TVariables>, "variables">>(
+		() => bindObservableMethods(observable),
+		[observable],
+	);
 
-  useRegisterSSRObservable(observable, renderPromises, ssrAllowed);
+	useRegisterSSRObservable(observable, renderPromises, ssrAllowed);
 
-  const result = useObservableSubscriptionResult<TData, TVariables>(
-    resultData,
-    observable,
-    client,
-    options,
-    watchQueryOptions,
-    disableNetworkFetches,
-    partialRefetch,
-    isSyncSSR,
-    {
-      onCompleted: options.onCompleted || noop,
-      onError: options.onError || noop,
-    }
-  );
+	const result = useObservableSubscriptionResult<TData, TVariables>(
+		resultData,
+		observable,
+		client,
+		options,
+		watchQueryOptions,
+		disableNetworkFetches,
+		partialRefetch,
+		isSyncSSR,
+		{
+			onCompleted: options.onCompleted || noop,
+			onError: options.onError || noop,
+		},
+	);
 
-  return {
-    result,
-    obsQueryFields,
-    observable,
-    resultData,
-    client,
-    onQueryExecuted,
-  };
+	return {
+		result,
+		obsQueryFields,
+		observable,
+		resultData,
+		client,
+		onQueryExecuted,
+	};
 }
 ```
 
@@ -115,157 +105,129 @@ With all the configurations and options intertwined, it's not immediately clear 
 
 ```ts
 function useObservableSubscriptionResult<
-  TData = any,
-  TVariables extends OperationVariables = OperationVariables,
+	TData = any,
+	TVariables extends OperationVariables = OperationVariables,
 >(
-  resultData: InternalResult<TData, TVariables>,
-  observable: ObservableQuery<TData, TVariables>,
-  client: ApolloClient<object>,
-  options: QueryHookOptions<NoInfer<TData>, NoInfer<TVariables>>,
-  watchQueryOptions: Readonly<WatchQueryOptions<TVariables, TData>>,
-  disableNetworkFetches: boolean,
-  partialRefetch: boolean | undefined,
-  isSyncSSR: boolean,
-  callbacks: {
-    onCompleted: (data: TData) => void;
-    onError: (error: ApolloError) => void;
-  }
+	resultData: InternalResult<TData, TVariables>,
+	observable: ObservableQuery<TData, TVariables>,
+	client: ApolloClient<object>,
+	options: QueryHookOptions<NoInfer<TData>, NoInfer<TVariables>>,
+	watchQueryOptions: Readonly<WatchQueryOptions<TVariables, TData>>,
+	disableNetworkFetches: boolean,
+	partialRefetch: boolean | undefined,
+	isSyncSSR: boolean,
+	callbacks: {
+		onCompleted: (data: TData) => void;
+		onError: (error: ApolloError) => void;
+	},
 ) {
-  const callbackRef = React.useRef<Callbacks<TData>>(callbacks);
-  React.useEffect(() => {
-    callbackRef.current = callbacks;
-  });
+	const callbackRef = React.useRef<Callbacks<TData>>(callbacks);
+	React.useEffect(() => {
+		callbackRef.current = callbacks;
+	});
 
-  const resultOverride =
-    (
-      (isSyncSSR || disableNetworkFetches) &&
-      options.ssr === false &&
-      !options.skip
-    ) ?
-      ssrDisabledResult
-    : options.skip || watchQueryOptions.fetchPolicy === "standby" ?
-      skipStandbyResult
-    : void 0;
+	const resultOverride =
+		(isSyncSSR || disableNetworkFetches) && options.ssr === false && !options.skip
+			? ssrDisabledResult
+			: options.skip || watchQueryOptions.fetchPolicy === "standby"
+				? skipStandbyResult
+				: void 0;
 
-  const previousData = resultData.previousData;
-  const currentResultOverride = React.useMemo(
-    () =>
-      resultOverride &&
-      toQueryResult(resultOverride, previousData, observable, client),
-    [client, observable, resultOverride, previousData]
-  );
+	const previousData = resultData.previousData;
+	const currentResultOverride = React.useMemo(
+		() => resultOverride && toQueryResult(resultOverride, previousData, observable, client),
+		[client, observable, resultOverride, previousData],
+	);
 
-  return useSyncExternalStore(
-    React.useCallback(
-      (handleStoreChange) => {
-        disableNetworkFetches;
+	return useSyncExternalStore(
+		React.useCallback(
+			(handleStoreChange) => {
+				disableNetworkFetches;
 
-        if (isSyncSSR) {
-          return () => {};
-        }
+				if (isSyncSSR) {
+					return () => {};
+				}
 
-        const onNext = () => {
-          const previousResult = resultData.current;
-          const result = observable.getCurrentResult();
-          if (
-            previousResult &&
-            previousResult.loading === result.loading &&
-            previousResult.networkStatus === result.networkStatus &&
-            equal(previousResult.data, result.data)
-          ) {
-            return;
-          }
+				const onNext = () => {
+					const previousResult = resultData.current;
+					const result = observable.getCurrentResult();
+					if (
+						previousResult &&
+						previousResult.loading === result.loading &&
+						previousResult.networkStatus === result.networkStatus &&
+						equal(previousResult.data, result.data)
+					) {
+						return;
+					}
 
-          setResult(
-            result,
-            resultData,
-            observable,
-            client,
-            partialRefetch,
-            handleStoreChange,
-            callbackRef.current
-          );
-        };
+					setResult(
+						result,
+						resultData,
+						observable,
+						client,
+						partialRefetch,
+						handleStoreChange,
+						callbackRef.current,
+					);
+				};
 
-        const onError = (error: Error) => {
-          subscription.current.unsubscribe();
-          subscription.current = observable.resubscribeAfterError(
-            onNext,
-            onError
-          );
+				const onError = (error: Error) => {
+					subscription.current.unsubscribe();
+					subscription.current = observable.resubscribeAfterError(onNext, onError);
 
-          if (!hasOwnProperty.call(error, "graphQLErrors")) {
-            throw error;
-          }
+					if (!hasOwnProperty.call(error, "graphQLErrors")) {
+						throw error;
+					}
 
-          const previousResult = resultData.current;
-          if (
-            !previousResult ||
-            (previousResult && previousResult.loading) ||
-            !equal(error, previousResult.error)
-          ) {
-            setResult(
-              {
-                data: (previousResult && previousResult.data) as TData,
-                error: error as ApolloError,
-                loading: false,
-                networkStatus: NetworkStatus.error,
-              },
-              resultData,
-              observable,
-              client,
-              partialRefetch,
-              handleStoreChange,
-              callbackRef.current
-            );
-          }
-        };
+					const previousResult = resultData.current;
+					if (
+						!previousResult ||
+						(previousResult && previousResult.loading) ||
+						!equal(error, previousResult.error)
+					) {
+						setResult(
+							{
+								data: (previousResult && previousResult.data) as TData,
+								error: error as ApolloError,
+								loading: false,
+								networkStatus: NetworkStatus.error,
+							},
+							resultData,
+							observable,
+							client,
+							partialRefetch,
+							handleStoreChange,
+							callbackRef.current,
+						);
+					}
+				};
 
-        const subscription = { current: observable.subscribe(onNext, onError) };
+				const subscription = { current: observable.subscribe(onNext, onError) };
 
-        return () => {
-          setTimeout(() => subscription.current.unsubscribe());
-        };
-      },
+				return () => {
+					setTimeout(() => subscription.current.unsubscribe());
+				};
+			},
 
-      [
-        disableNetworkFetches,
-        isSyncSSR,
-        observable,
-        resultData,
-        partialRefetch,
-        client,
-      ]
-    ),
-    () =>
-      currentResultOverride ||
-      getCurrentResult(
-        resultData,
-        observable,
-        callbackRef.current,
-        partialRefetch,
-        client
-      ),
-    () =>
-      currentResultOverride ||
-      getCurrentResult(
-        resultData,
-        observable,
-        callbackRef.current,
-        partialRefetch,
-        client
-      )
-  );
+			[disableNetworkFetches, isSyncSSR, observable, resultData, partialRefetch, client],
+		),
+		() =>
+			currentResultOverride ||
+			getCurrentResult(resultData, observable, callbackRef.current, partialRefetch, client),
+		() =>
+			currentResultOverride ||
+			getCurrentResult(resultData, observable, callbackRef.current, partialRefetch, client),
+	);
 }
 ```
 
 That's quite a long block of code, but don't be intimidated—let's break it down piece by piece.
 
 ```ts
-  const callbackRef = React.useRef<Callbacks<TData>>(callbacks);
-  React.useEffect(() => {
-    callbackRef.current = callbacks;
-  });
+const callbackRef = React.useRef<Callbacks<TData>>(callbacks);
+React.useEffect(() => {
+	callbackRef.current = callbacks;
+});
 ```
 
 Overall, the comments are quite helpful and the patterns aren't unfamiliar, making it fairly easy to follow.
@@ -299,28 +261,28 @@ Review comment for this change: https://github.com/apollographql/apollo-client/p
 Let's look at the `onNext` callback declaration below.
 
 ```ts
-        const onNext = () => {
-          const previousResult = resultData.current;
-          const result = observable.getCurrentResult();
-          if (
-            previousResult &&
-            previousResult.loading === result.loading &&
-            previousResult.networkStatus === result.networkStatus &&
-            equal(previousResult.data, result.data)
-          ) {
-            return;
-          }
+const onNext = () => {
+	const previousResult = resultData.current;
+	const result = observable.getCurrentResult();
+	if (
+		previousResult &&
+		previousResult.loading === result.loading &&
+		previousResult.networkStatus === result.networkStatus &&
+		equal(previousResult.data, result.data)
+	) {
+		return;
+	}
 
-          setResult(
-            result,
-            resultData,
-            observable,
-            client,
-            partialRefetch,
-            handleStoreChange,
-            callbackRef.current
-          );
-        };
+	setResult(
+		result,
+		resultData,
+		observable,
+		client,
+		partialRefetch,
+		handleStoreChange,
+		callbackRef.current,
+	);
+};
 ```
 
 To properly understand the name `onNext` in context, you need familiarity with the Observer pattern and Observable objects. In simple terms, the Observer pattern is a design pattern where a provider (Observable) sends notifications to its observers. Observers implement callback methods like `onNext`, `onError`, and `onComplete` to declare how they handle provided events. So in this context, `onNext` is called when something like a query response is received.
@@ -331,31 +293,31 @@ In all other cases, `setResult` is called to store the current result. The `setR
 
 ```ts
 function setResult<TData, TVariables extends OperationVariables>(
-  nextResult: ApolloQueryResult<TData>,
-  resultData: InternalResult<TData, TVariables>,
-  observable: ObservableQuery<TData, TVariables>,
-  client: ApolloClient<object>,
-  partialRefetch: boolean | undefined,
-  forceUpdate: () => void,
-  callbacks: Callbacks<TData>
+	nextResult: ApolloQueryResult<TData>,
+	resultData: InternalResult<TData, TVariables>,
+	observable: ObservableQuery<TData, TVariables>,
+	client: ApolloClient<object>,
+	partialRefetch: boolean | undefined,
+	forceUpdate: () => void,
+	callbacks: Callbacks<TData>,
 ) {
-  const previousResult = resultData.current;
-  if (previousResult && previousResult.data) {
-    resultData.previousData = previousResult.data;
-  }
+	const previousResult = resultData.current;
+	if (previousResult && previousResult.data) {
+		resultData.previousData = previousResult.data;
+	}
 
-  if (!nextResult.error && isNonEmptyArray(nextResult.errors)) {
-    nextResult.error = new ApolloError({ graphQLErrors: nextResult.errors });
-  }
+	if (!nextResult.error && isNonEmptyArray(nextResult.errors)) {
+		nextResult.error = new ApolloError({ graphQLErrors: nextResult.errors });
+	}
 
-  resultData.current = toQueryResult(
-    unsafeHandlePartialRefetch(nextResult, observable, partialRefetch),
-    resultData.previousData,
-    observable,
-    client
-  );
-  forceUpdate();
-  handleErrorOrCompleted(nextResult, previousResult?.networkStatus, callbacks);
+	resultData.current = toQueryResult(
+		unsafeHandlePartialRefetch(nextResult, observable, partialRefetch),
+		resultData.previousData,
+		observable,
+		client,
+	);
+	forceUpdate();
+	handleErrorOrCompleted(nextResult, previousResult?.networkStatus, callbacks);
 }
 ```
 
@@ -364,11 +326,11 @@ The current response data is saved as `previousData` in the internal store. If t
 `forceUpdate()` is the `handleStoreChange` method passed when calling `setResult`. This method corresponds to the argument of the useCallback function passed as the first argument to `useSyncExternalStore`. It might look confusing in code, but it becomes clear when you look at the `useSyncExternalStore` signature:
 
 ```ts
-    export function useSyncExternalStore<Snapshot>(
-        subscribe: (onStoreChange: () => void) => () => void,
-        getSnapshot: () => Snapshot,
-        getServerSnapshot?: () => Snapshot,
-    ): Snapshot;
+export function useSyncExternalStore<Snapshot>(
+	subscribe: (onStoreChange: () => void) => () => void,
+	getSnapshot: () => Snapshot,
+	getServerSnapshot?: () => Snapshot,
+): Snapshot;
 ```
 
 That `onStoreChange` parameter is what's passed as `handleStoreChange` and then as `forceUpdate`.
@@ -379,30 +341,30 @@ Let's take a brief detour to look at `handleErrorOrCompleted`.
 
 ```ts
 function handleErrorOrCompleted<TData>(
-  result: ApolloQueryResult<TData>,
-  previousNetworkStatus: NetworkStatus | undefined,
-  callbacks: Callbacks<TData>
+	result: ApolloQueryResult<TData>,
+	previousNetworkStatus: NetworkStatus | undefined,
+	callbacks: Callbacks<TData>,
 ) {
-  if (!result.loading) {
-    const error = toApolloError(result);
+	if (!result.loading) {
+		const error = toApolloError(result);
 
-    // wait a tick in case we are in the middle of rendering a component
-    Promise.resolve()
-      .then(() => {
-        if (error) {
-          callbacks.onError(error);
-        } else if (
-          result.data &&
-          previousNetworkStatus !== result.networkStatus &&
-          result.networkStatus === NetworkStatus.ready
-        ) {
-          callbacks.onCompleted(result.data);
-        }
-      })
-      .catch((error) => {
-        invariant.warn(error);
-      });
-  }
+		// wait a tick in case we are in the middle of rendering a component
+		Promise.resolve()
+			.then(() => {
+				if (error) {
+					callbacks.onError(error);
+				} else if (
+					result.data &&
+					previousNetworkStatus !== result.networkStatus &&
+					result.networkStatus === NetworkStatus.ready
+				) {
+					callbacks.onCompleted(result.data);
+				}
+			})
+			.catch((error) => {
+				invariant.warn(error);
+			});
+	}
 }
 ```
 
@@ -413,39 +375,36 @@ https://github.com/apollographql/apollo-client/pull/9801 — Delay execution of 
 Let's return to the `useObservableSubscriptionResult` hook and continue.
 
 ```ts
-        const onError = (error: Error) => {
-          subscription.current.unsubscribe();
-          subscription.current = observable.resubscribeAfterError(
-            onNext,
-            onError
-          );
+const onError = (error: Error) => {
+	subscription.current.unsubscribe();
+	subscription.current = observable.resubscribeAfterError(onNext, onError);
 
-          if (!hasOwnProperty.call(error, "graphQLErrors")) {
-            throw error;
-          }
+	if (!hasOwnProperty.call(error, "graphQLErrors")) {
+		throw error;
+	}
 
-          const previousResult = resultData.current;
-          if (
-            !previousResult ||
-            (previousResult && previousResult.loading) ||
-            !equal(error, previousResult.error)
-          ) {
-            setResult(
-              {
-                data: (previousResult && previousResult.data) as TData,
-                error: error as ApolloError,
-                loading: false,
-                networkStatus: NetworkStatus.error,
-              },
-              resultData,
-              observable,
-              client,
-              partialRefetch,
-              handleStoreChange,
-              callbackRef.current
-            );
-          }
-        };
+	const previousResult = resultData.current;
+	if (
+		!previousResult ||
+		(previousResult && previousResult.loading) ||
+		!equal(error, previousResult.error)
+	) {
+		setResult(
+			{
+				data: (previousResult && previousResult.data) as TData,
+				error: error as ApolloError,
+				loading: false,
+				networkStatus: NetworkStatus.error,
+			},
+			resultData,
+			observable,
+			client,
+			partialRefetch,
+			handleStoreChange,
+			callbackRef.current,
+		);
+	}
+};
 ```
 
 Here we see the `onError` callback. When an error occurs, it unsubscribes and resubscribes via `resubscribeAfterError`. Looking at the internal implementation, it simply clears the last data and creates a new subscription.
@@ -455,11 +414,11 @@ Since it throws for non-GraphQL errors, the `onError` callback apparently only e
 Looking at the code just below:
 
 ```ts
-        const subscription = { current: observable.subscribe(onNext, onError) };
+const subscription = { current: observable.subscribe(onNext, onError) };
 
-        return () => {
-          setTimeout(() => subscription.current.unsubscribe());
-        };
+return () => {
+	setTimeout(() => subscription.current.unsubscribe());
+};
 ```
 
 There's a comment about wrapping the subscription in a `current` object due to compiler evaluation issues, and the cleanup function (returned from the subscribe function) wraps unsubscribe in `setTimeout`.
@@ -487,18 +446,18 @@ Here's a summary of the overall flow so far:
 1. The useQuery hook is a wrapper around `_useQuery`, which memoizes the return value of `useQueryInternals`.
 2. Digging into suspicious parts of `useQueryInternals`, we found `useObservableSubscriptionResult`, which returns query results.
 3. `useObservableSubscriptionResult` uses `useSyncExternalStore` with an Observer implementation that has `onNext` and `onError` callbacks to subscribe to query results.
-4. To find where the actual request is made, we need to look at where the observable is *created*, not where it's *subscribed to*.
+4. To find where the actual request is made, we need to look at where the observable is _created_, not where it's _subscribed to_.
 
 In hindsight, the hook name `useObservableSubscriptionResult` clearly states that it manages subscriptions and handles callbacks and state updates through results! So the actual request must originate from wherever the observable object (passed as an argument) is created. With this in mind, let's re-examine `useQueryInternals` for suspicious spots:
 
 ```ts
-  const [{ observable, resultData }, onQueryExecuted] = useInternalState(
-    client,
-    query,
-    options,
-    renderPromises,
-    makeWatchQueryOptions
-  );
+const [{ observable, resultData }, onQueryExecuted] = useInternalState(
+	client,
+	query,
+	options,
+	renderPromises,
+	makeWatchQueryOptions,
+);
 ```
 
 I initially glossed over `useInternalState`, assuming from its name that it only managed internal state. But on closer inspection, its return value includes `observable`. Digging into the implementation, we find where the observable is declared:
@@ -666,18 +625,20 @@ We've finally arrived! There's a process that transforms the query operation int
 Apollo Client is designed to allow free injection of HTTP request implementations, which can be freely defined in the `httpLink` configuration during Apollo Client initialization:
 
 ```ts
-import fetch from 'cross-fetch';
+import fetch from "cross-fetch";
 
 const httpLink = new HttpLink({ uri: ENV.APOLLO_API_END_POINT, fetch });
-const authLink = setContext((_, { headers }) => { /* ... */ });
+const authLink = setContext((_, { headers }) => {
+	/* ... */
+});
 const link = ApolloLink.from([authLink, httpLink]);
 
 export const initializeApollo = () => {
-  return new ApolloClient({
-    link,
-    cache,
-    // ...
-  });
+	return new ApolloClient({
+		link,
+		cache,
+		// ...
+	});
 };
 ```
 
@@ -687,15 +648,14 @@ export const initializeApollo = () => {
 const backupFetch = maybe(() => fetch);
 
 export const createHttpLink = (linkOptions: HttpOptions = {}) => {
-  // ...
-  return new Observable((observer) => {
-    const currentFetch = preferredFetch || maybe(() => fetch) || backupFetch;
+	// ...
+	return new Observable((observer) => {
+		const currentFetch = preferredFetch || maybe(() => fetch) || backupFetch;
 
-    currentFetch!(chosenURI, options)
-      .then((response) => {
-        // ...
-      });
-  });
+		currentFetch!(chosenURI, options).then((response) => {
+			// ...
+		});
+	});
 };
 ```
 

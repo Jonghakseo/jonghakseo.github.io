@@ -32,17 +32,15 @@ export function getUniqueTagsWithCount(
  * These should be excluded from main post listings, RSS, sitemap, etc.
  */
 export function getTranslationSlugs(posts: Array<CollectionEntry<"post">>): Set<string> {
-	return new Set(
-		posts
-			.filter((p) => p.data.translationSlug)
-			.map((p) => p.data.translationSlug!),
-	);
+	return new Set(posts.filter((p) => p.data.translationSlug).map((p) => p.data.translationSlug!));
 }
 
 /**
  * Filter out translation-only posts, returning only "main" posts.
  */
-export function getMainPosts(posts: Array<CollectionEntry<"post">>): Array<CollectionEntry<"post">> {
+export function getMainPosts(
+	posts: Array<CollectionEntry<"post">>,
+): Array<CollectionEntry<"post">> {
 	const translationSlugs = getTranslationSlugs(posts);
 	return posts.filter((p) => !translationSlugs.has(p.slug));
 }

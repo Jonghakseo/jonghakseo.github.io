@@ -5,13 +5,11 @@ description: "What I've learned from reaching 2000 Stars on GitHub."
 tags: ["open-source"]
 ---
 
-
 If you have already arrived here through that repository, you might be aware that I am maintaining an [open-source boilerplate](https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite) designed to facilitate the development of Chrome extensions.
 
 When I first initiated this boilerplate project in early 2023,
 my intention was simply to bring the experience of using Vite to Chrome extensions in a casual manner.
 However, as I received a lot of encouragement and feedback, the project evolved significantly.
-
 
 <a href="https://star-history.com/#Jonghakseo/chrome-extension-boilerplate-react-vite&Date">
  <picture>
@@ -50,13 +48,13 @@ Additionally, I added support for Manifest V3 and provided type support to help 
 
 ```typescript
 export const getPlugins = (isDev: boolean): PluginOption[] => [
-  makeManifest({ getCacheInvalidationKey }),
-  customDynamicImport(),
-  // You can toggle enable HMR in background script or view
-  addHmr({ background: true, view: true, isDev }),
-  isDev && watchRebuild({ afterWriteBundle: regenerateCacheInvalidationKey }),
-  // For fix issue#177 (https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite/issues/177)
-  inlineVitePreloadScript(),
+	makeManifest({ getCacheInvalidationKey }),
+	customDynamicImport(),
+	// You can toggle enable HMR in background script or view
+	addHmr({ background: true, view: true, isDev }),
+	isDev && watchRebuild({ afterWriteBundle: regenerateCacheInvalidationKey }),
+	// For fix issue#177 (https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite/issues/177)
+	inlineVitePreloadScript(),
 ];
 ```
 
@@ -86,7 +84,6 @@ I have written about this in more detail on my other blog post titled [What I've
 I decided to continue developing the project with the encouragement and support of many people.
 Although I had many ideas, I had hesitated to implement them due to expected time constraints.
 I decided to redesign the project to address the fundamental limitations of the product.
-
 
 [Boilerplate Redesign #400](https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite/issues/400)
 

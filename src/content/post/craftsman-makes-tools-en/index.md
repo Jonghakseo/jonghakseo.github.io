@@ -17,7 +17,7 @@ So let me cut to the chase: this is a chronicle of my journey through coding age
 
 I've tried pretty much every notable coding agent out there — from Claude Code version 1.0, to Codex, Conductor, Amp, OpenCode, and Oh-My-OpenCode. As a team lead, I spend more time reviewing, designing, and setting direction than writing code myself. Coding agents have become a critical pillar of my productivity. (It's been about a month or two since I stopped writing code directly.)
 
-Yet something always felt off. Like driving a car that runs great but has an uncomfortable steering wheel, or an engine that's powerful but seats that don't fit. Even while using someone else's "great tool," I never had the feeling that it was *my* tool.
+Yet something always felt off. Like driving a car that runs great but has an uncomfortable steering wheel, or an engine that's powerful but seats that don't fit. Even while using someone else's "great tool," I never had the feeling that it was _my_ tool.
 
 Let me break down what I felt with each one.
 
@@ -97,7 +97,7 @@ Building it myself actually had advantages. I gained the ability to control thin
 
 While using Claude Code, I always had this thought:
 
-*"At this point, I want to fork a new agent with this exact context and explore an idea that's slightly off-topic."*
+_"At this point, I want to fork a new agent with this exact context and explore an idea that's slightly off-topic."_
 
 I implemented it in pi as the `>>` shorthand.
 
@@ -116,17 +116,17 @@ I even set up simple symbols after `>>` to extremely simplify and personalize su
 `>>? (Researcher)`, `>># (Planner)`, `>>@ (Browser)` and so on... The convenience is hard to overstate. I was surprised myself that this level of customization was even possible.
 
 ![Forking a sub-agent with >> in pi](../craftsman-makes-tools/subagent-fork.png)
-*A single `>>` line forks a new agent with the current context*
+_A single `>>` line forks a new agent with the current context_
 
 ![Sub-agent running in the background](../craftsman-makes-tools/subagent-running.png)
-*While the sub-agent works, the main agent stays free*
+_While the sub-agent works, the main agent stays free_
 
 ### '<>' and '><' — Moving Freely Between Layers
 
 If `>>` is the experience of "spawning a child agent," then `<>` and `><` are about moving freely between that child and its parent.
 
-- `<> <runId>` — *enter* an already-running sub-agent session.
-- `><` — *come back up* from a sub-agent to the parent.
+- `<> <runId>` — _enter_ an already-running sub-agent session.
+- `><` — _come back up_ from a sub-agent to the parent.
 
 Here's what it looks like in practice. You fire off `>> review this PR`. Back in the main agent, you're working on something else — then you decide you want to give the review agent some extra context. `<> <runId>` and you teleport right into that agent's session. Say what you need to say, then `><` to return to main.
 
@@ -135,7 +135,7 @@ Fork as many agents as you want. Drop into any of them whenever you feel like it
 Once this system becomes second nature, something shifts. You're not just "sending agents off and hoping for the best." You can step into any agent, course-correct in real time, and step back out. It turns delegation from an act of faith into something you can actually steer.
 
 ![Entering a sub-agent session with <> and returning with ><](../craftsman-makes-tools/subagent-enter.png)
-*`<> <runId>` to step into the agent, say what you need, then `><` to come back*
+_`<> <runId>` to step into the agent, say what you need, then `><` to come back_
 
 ### /github Overlay
 
@@ -144,7 +144,7 @@ After doing code reviews or opening PRs, checking if AI reviews were done or CI 
 Tedious. So I built the `/github` command. It pops up as an overlay. The PR status I care about — review status, CI results, merge readiness — is available right inside the terminal. Once I built it, window switching disappeared. This seems trivial but it's significant.
 
 ![GitHub PR status overlay inside the terminal](../craftsman-makes-tools/github-overlay.png)
-*PR status, CI results, and review comments — all without leaving the terminal*
+_PR status, CI results, and review comments — all without leaving the terminal_
 
 ### Screen Saver
 
@@ -153,7 +153,7 @@ This is one I actually want to show off. Since pi is TUI-based, when you have mu
 I built a screen saver. After 5 minutes of no input, it displays the session's topic, repo, and branch information on screen. When you return, you can immediately grasp the context. It's a minor feature, but the cognitive load reduction when working with multiple sessions is dramatic.
 
 ![Screensaver showing active task names across multiple sessions](../craftsman-makes-tools/screensaver.png)
-*After 5 minutes of inactivity, the current task name fills the screen. A lifesaver when running multiple sessions*
+_After 5 minutes of inactivity, the current task name fills the screen. A lifesaver when running multiple sessions_
 
 ### And More
 
@@ -163,7 +163,7 @@ I built a screen saver. After 5 minutes of no input, it displays the session's t
 - **files, todos Extensions** — Took other users' extension code and customized it to my taste.
 
 ![Built-in diff viewer](../craftsman-makes-tools/diff-viewer.png)
-*A custom-built diff viewer. Check what the sub-agent changed without leaving the terminal*
+_A custom-built diff viewer. Check what the sub-agent changed without leaving the terminal_
 
 ---
 

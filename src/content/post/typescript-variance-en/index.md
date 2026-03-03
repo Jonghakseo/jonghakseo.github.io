@@ -32,9 +32,9 @@ Even when trying to explain it simply, it's hard to make it intuitive—so let's
 Consider the following types A, B, and C:
 
 ```typescript
-type A = string
-type B = string | number
-type C = string | number | null
+type A = string;
+type B = string | number;
+type C = string | number | null;
 ```
 
 Now let's declare a function type called Foo:
@@ -47,19 +47,19 @@ Which of the following functions can safely be called while respecting this func
 
 ```typescript
 const foo1: Foo = (a: A) => {
-  return {} as A;
+	return {} as A;
 };
 
 const foo2: Foo = (a: A) => {
-  return {} as C;
+	return {} as C;
 };
 
 const foo3: Foo = (c: C) => {
-  return {} as C;
+	return {} as C;
 };
 
 const foo4: Foo = (c: C) => {
-  return {} as A;
+	return {} as A;
 };
 ```
 
@@ -110,7 +110,7 @@ Consider the signature of `Array.push`:
 
 ```typescript
 interface Array<T> {
-    push(...items: T[]): number;
+	push(...items: T[]): number;
 }
 ```
 
@@ -122,7 +122,7 @@ Per function parameter contravariance, you shouldn't be able to assign `(...item
 
 Now something feels logically off again.
 
-Adding a string to an array of numbers and strings isn't unsafe, so in this case the function parameter *should* be covariant—leading us to the conclusion that contravariance isn't always correct.
+Adding a string to an array of numbers and strings isn't unsafe, so in this case the function parameter _should_ be covariant—leading us to the conclusion that contravariance isn't always correct.
 
 ![Array.push and covariance](../typescript-variance/img3.png)
 
