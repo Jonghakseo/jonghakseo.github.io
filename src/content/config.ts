@@ -29,6 +29,8 @@ const post = defineCollection({
 				.optional(),
 			tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
 			ogImage: z.string().optional(),
+			lang: z.enum(["ko", "en"]).default("en"),
+			translationSlug: z.string().optional(),
 		}),
 });
 

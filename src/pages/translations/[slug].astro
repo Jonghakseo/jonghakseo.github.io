@@ -1,0 +1,32 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import { getCollection } from "astro:content";
+import { getTranslationSlugs } from "@/utils";
+
+export const getStaticPaths = (async () => {
+	const allPosts = await getCollection("post");
+	const translationSlugs = getTranslationSlugs(allPosts);
+
+	// Only generate pages for translation posts (those whose slug is referenced by another post's translationSlug)
+	const translationPosts = allPosts.filter((p) => translationSlugs.has(p.slug));
+
+	return translationPosts.map((entry) => ({
+		params: { slug: entry.slug },
+		props: { entry },
+	}));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<html>
+	<head>
+		<meta name="robots" content="noindex, nofollow" />
+	</head>
+	<body>
+		<Content />
+	</body>
+</html>

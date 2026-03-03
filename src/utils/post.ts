@@ -26,3 +26,23 @@ export function getUniqueTagsWithCount(
 		),
 	].sort((a, b) => b[1] - a[1]);
 }
+
+/**
+ * Get the set of slugs that are translations (referenced by another post's translationSlug).
+ * These should be excluded from main post listings, RSS, sitemap, etc.
+ */
+export function getTranslationSlugs(posts: Array<CollectionEntry<"post">>): Set<string> {
+	return new Set(
+		posts
+			.filter((p) => p.data.translationSlug)
+			.map((p) => p.data.translationSlug!),
+	);
+}
+
+/**
+ * Filter out translation-only posts, returning only "main" posts.
+ */
+export function getMainPosts(posts: Array<CollectionEntry<"post">>): Array<CollectionEntry<"post">> {
+	const translationSlugs = getTranslationSlugs(posts);
+	return posts.filter((p) => !translationSlugs.has(p.slug));
+}

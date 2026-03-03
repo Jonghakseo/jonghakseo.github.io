@@ -81,5 +81,10 @@ export async function GET({ params: { slug } }: APIContext) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	const posts = await getCollection("post");
-	return posts.filter(({ data }) => !data.ogImage).map(({ slug }) => ({ params: { slug } }));
+	// Exclude translation-only posts (those whose slug is referenced by another post's translationSlug)
+	const translationSlugs = new Set(
+		posts.filter((p) => p.data.translationSlug).map((p) => p.data.translationSlug!),
+	);
+	const mainPosts = posts.filter((p) => !translationSlugs.has(p.slug));
+	return mainPosts.filter(({ data }) => !data.ogImage).map(({ slug }) => ({ params: { slug } }));
 };

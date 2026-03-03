@@ -11,12 +11,15 @@ interface Props {
 
 const { post } = Astro.props;
 const {
-	data: { title, description, ogImage, publishDate, updatedDate },
+	data: { title, description, ogImage, publishDate, updatedDate, lang, translationSlug },
 	slug,
 } = post;
 const socialImage = ogImage ?? `/og-image/${slug}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { headings } = await post.render();
+
+const hasTranslation = !!translationSlug;
+const targetLang = lang === "ko" ? "en" : "ko";
 ---
 
 <script>
@@ -38,12 +41,128 @@ const { headings } = await post.render();
 	observer.observe(targetHeader);
 </script>
 
+<script>
+	function initLangToggle() {
+		const toggleBtn = document.getElementById("lang-toggle-btn") as HTMLButtonElement | null;
+		if (!toggleBtn) return;
+
+		let translationCache: string | null = null;
+		let isShowingTranslation = false;
+		let originalContent: string | null = null;
+
+		const targetLang = toggleBtn.dataset.targetLang!;
+		const currentLang = toggleBtn.dataset.currentLang!;
+		const translationSlug = toggleBtn.dataset.translationSlug!;
+
+		const labelOriginal = targetLang === "ko" ? "🇰🇷 한국어로 보기" : "🇺🇸 Read in English";
+		const labelTranslation = currentLang === "ko" ? "🇰🇷 한국어로 보기" : "🇺🇸 Read in English";
+
+		// Check URL for initial lang param
+		const urlParams = new URLSearchParams(window.location.search);
+		const langParam = urlParams.get("lang");
+
+		async function loadTranslation(): Promise<string | null> {
+			if (translationCache) return translationCache;
+
+			toggleBtn!.textContent = "⏳ Loading...";
+			toggleBtn!.disabled = true;
+
+			try {
+				const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+				const response = await fetch(`${basePath}/translations/${translationSlug}/`);
+				if (!response.ok) throw new Error(`HTTP ${response.status}`);
+				const rawHtml = await response.text();
+				// DOMParser로 body content만 추출 (Astro boilerplate 제거)
+				const doc = new DOMParser().parseFromString(rawHtml, "text/html");
+				translationCache = doc.body.innerHTML;
+				return translationCache;
+			} catch (e) {
+				console.error("Failed to load translation:", e);
+				toggleBtn!.textContent = labelOriginal;
+				toggleBtn!.disabled = false;
+				return null;
+			}
+		}
+
+		async function showTranslation() {
+			const postContent = document.getElementById("post-content");
+			if (!postContent) return;
+
+			if (!originalContent) {
+				originalContent = postContent.innerHTML;
+			}
+
+			const html = await loadTranslation();
+			if (!html) return;
+
+			postContent.innerHTML = html;
+			isShowingTranslation = true;
+			toggleBtn!.textContent = labelTranslation;
+			toggleBtn!.disabled = false;
+
+			// Update URL without navigation
+			const newUrl = new URL(window.location.href);
+			newUrl.searchParams.set("lang", targetLang);
+			window.history.replaceState({}, "", newUrl.toString());
+		}
+
+		function showOriginal() {
+			const postContent = document.getElementById("post-content");
+			if (!postContent || !originalContent) return;
+
+			postContent.innerHTML = originalContent;
+			isShowingTranslation = false;
+			toggleBtn!.textContent = labelOriginal;
+
+			// Update URL without navigation
+			const newUrl = new URL(window.location.href);
+			newUrl.searchParams.delete("lang");
+			window.history.replaceState({}, "", newUrl.toString());
+		}
+
+		toggleBtn.addEventListener("click", async () => {
+			if (!isShowingTranslation) {
+				await showTranslation();
+			} else {
+				showOriginal();
+			}
+		});
+
+		// Auto-load translation if ?lang= parameter is set
+		if (langParam && langParam !== currentLang) {
+			showTranslation();
+		}
+	}
+
+	// Run on initial load
+	initLangToggle();
+
+	// Re-run on Astro view transitions
+	document.addEventListener("astro:after-swap", initLangToggle);
+</script>
+
 <BaseLayout meta={{ title, description, articleDate, ogImage: socialImage }}>
 	<div class="gap-x-10 lg:flex lg:items-start">
 		{!!headings.length && <TOC headings={headings} />}
 		<article class="flex-grow break-words" data-pagefind-body>
 			<div id="blog-hero"><BlogHero content={post} /></div>
+			{
+				hasTranslation && (
+					<div class="my-4 flex justify-end">
+						<button
+							id="lang-toggle-btn"
+							data-target-lang={targetLang}
+							data-current-lang={lang}
+							data-translation-slug={translationSlug}
+							class="rounded-lg border border-current px-3 py-1.5 text-sm font-medium transition-colors hover:bg-accent hover:text-bgColor"
+						>
+							{targetLang === "ko" ? "🇰🇷 한국어로 보기" : "🇺🇸 Read in English"}
+						</button>
+					</div>
+				)
+			}
 			<div
+				id="post-content"
 				class="prose-m prose prose-cactus mt-12 max-w-3xl prose-headings:font-semibold prose-headings:text-accent-2 prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none"
 			>
 				<slot />

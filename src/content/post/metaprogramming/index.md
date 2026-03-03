@@ -3,6 +3,8 @@ title: "Metaprogramming"
 publishDate: "2023/09/10"
 description: "This post is about metaprogramming. What is meta programming?"
 tags: ["meta", "meta programming", "proxy", "reflect"]
+lang: "en"
+translationSlug: "metaprogramming-ko"
 ---
 
 ## What is metaprogramming?

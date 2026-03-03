@@ -3,10 +3,16 @@ import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { getCollection } from "astro:content";
 import PostLayout from "@/layouts/BlogPost";
 import Comments from "@/components/Comments";
+import { getTranslationSlugs } from "@/utils";
 
 export const getStaticPaths = (async () => {
 	const blogEntries = await getCollection("post");
-	return blogEntries.map((entry) => ({
+	const translationSlugs = getTranslationSlugs(blogEntries);
+
+	// Only generate pages for main posts (exclude translation-only posts)
+	const mainEntries = blogEntries.filter((e) => !translationSlugs.has(e.slug));
+
+	return mainEntries.map((entry) => ({
 		params: { slug: entry.slug },
 		props: { entry },
 	}));
