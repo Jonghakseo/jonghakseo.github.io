@@ -210,3 +210,7 @@ The stability of Claude Code, the model power of Codex, the orchestration ideas 
 As I wrote in my previous post, I'm someone who enjoys solving any problem with software. No matter how much AI does for you, I'm the kind of person who finds joy in figuring out "how can I orchestrate all these AIs to maximize quality?" pi seems like the tool that lets me pursue that question most directly.
 
 A craftsman doesn't blame the tools. But today's craftsman goes one step further — they build them. And pi is where that building is easiest.
+
+---
+
+I've open-sourced my pi configuration and extensions [here](https://github.com/Jonghakseo/my-pi). Hope it's useful as a reference.
