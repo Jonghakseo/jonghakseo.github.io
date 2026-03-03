@@ -19,15 +19,18 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 const quality = entry.data.translationQuality ?? "draft";
+
+// Serialize headings for client-side ToC rebuild
+const headingsJson = JSON.stringify(headings);
 ---
 
 <html>
 	<head>
 		<meta name="robots" content="noindex, nofollow" />
 	</head>
-	<body data-translation-quality={quality} data-translation-title={entry.data.title} data-translation-description={entry.data.description}>
+	<body data-translation-quality={quality} data-translation-title={entry.data.title} data-translation-description={entry.data.description} data-translation-toc={headingsJson}>
 		<Content />
 	</body>
 </html>

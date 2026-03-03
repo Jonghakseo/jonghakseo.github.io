@@ -63,6 +63,7 @@ const targetLang = lang === "ko" ? "en" : "ko";
 
 		let translationQuality: string | null = null;
 		let translationTitle: string | null = null;
+		let translationHeadings: Array<{ depth: number; slug: string; text: string }> | null = null;
 
 		async function loadTranslation(): Promise<string | null> {
 			if (translationCache) return translationCache;
@@ -79,6 +80,13 @@ const targetLang = lang === "ko" ? "en" : "ko";
 				const doc = new DOMParser().parseFromString(rawHtml, "text/html");
 				translationQuality = doc.body.dataset.translationQuality ?? null;
 				translationTitle = doc.body.dataset.translationTitle ?? null;
+				// Parse translation headings for ToC
+				const tocJson = doc.body.dataset.translationToc;
+				if (tocJson) {
+					try {
+						translationHeadings = JSON.parse(tocJson);
+					} catch { /* ignore parse error */ }
+				}
 				translationCache = doc.body.innerHTML;
 				return translationCache;
 			} catch (e) {
@@ -87,6 +95,56 @@ const targetLang = lang === "ko" ? "en" : "ko";
 				toggleBtn!.disabled = false;
 				return null;
 			}
+		}
+
+		// --- ToC rebuild helpers ---
+		interface TocItem {
+			slug: string;
+			text: string;
+			depth: number;
+			subheadings: TocItem[];
+		}
+
+		function buildTocTree(headings: Array<{ depth: number; slug: string; text: string }>): TocItem[] {
+			const body = headings.filter((h) => h.depth > 1);
+			const toc: TocItem[] = [];
+
+			function diveChildren(item: TocItem, depth: number): TocItem[] {
+				if (depth === 1 || !item.subheadings.length) return item.subheadings;
+				return diveChildren(item.subheadings[item.subheadings.length - 1]!, depth - 1);
+			}
+
+			body.forEach((h) => {
+				const heading: TocItem = { ...h, subheadings: [] };
+				if (heading.depth === 2) {
+					toc.push(heading);
+				} else {
+					const last = toc[toc.length - 1];
+					if (!last || heading.depth < last.depth) {
+						toc.push(heading);
+					} else {
+						const gap = heading.depth - last.depth;
+						diveChildren(last, gap).push(heading);
+					}
+				}
+			});
+			return toc;
+		}
+
+		function renderTocItems(items: TocItem[]): string {
+			return items
+				.map((item) => {
+					const liClass = item.depth > 2 ? ' class="ms-2"' : "";
+					const aClass =
+						item.depth <= 2
+							? "block line-clamp-2 hover:text-accent mt-3"
+							: "block line-clamp-2 hover:text-accent mt-2 text-[0.6875rem]";
+					const children = item.subheadings.length
+						? `<ul>${renderTocItems(item.subheadings)}</ul>`
+						: "";
+					return `<li${liClass}><a class="${aClass}" href="#${item.slug}" aria-label="Scroll to section: ${item.text}"><span class="me-0.5">#</span>${item.text}</a>${children}</li>`;
+				})
+				.join("");
 		}
 
 		function showQualityBanner(show: boolean) {
@@ -113,6 +171,7 @@ const targetLang = lang === "ko" ? "en" : "ko";
 		}
 
 		let originalTitle: string | null = null;
+		let originalTocHtml: string | null = null;
 
 		async function showTranslation() {
 			const postContent = document.getElementById("post-content");
@@ -142,6 +201,14 @@ const targetLang = lang === "ko" ? "en" : "ko";
 				document.title = translationTitle;
 			}
 
+			// Swap ToC
+			const tocList = document.querySelector("aside.sticky ul");
+			if (tocList && translationHeadings && translationHeadings.length > 0) {
+				if (!originalTocHtml) originalTocHtml = tocList.innerHTML;
+				const tree = buildTocTree(translationHeadings);
+				tocList.innerHTML = renderTocItems(tree);
+			}
+
 			showQualityBanner(true);
 
 			// Update URL without navigation
@@ -168,6 +235,12 @@ const targetLang = lang === "ko" ? "en" : "ko";
 			// Restore document title
 			if (originalTitle) {
 				document.title = originalTitle;
+			}
+
+			// Restore ToC
+			const tocList = document.querySelector("aside.sticky ul");
+			if (tocList && originalTocHtml) {
+				tocList.innerHTML = originalTocHtml;
 			}
 
 			// Update URL without navigation
