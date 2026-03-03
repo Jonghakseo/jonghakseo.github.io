@@ -23,7 +23,7 @@ These metrics are based on mobile. Given that our service has many mobile users 
 
 So what efforts did we make to achieve these improvements?
 
-### 1. Dynamic i18n Data Loading
+## 1. Dynamic i18n Data Loading
 
 Of all the tasks we undertook to improve Core Web Vitals, I believe this one contributed the most to reducing TBT (INP).
 

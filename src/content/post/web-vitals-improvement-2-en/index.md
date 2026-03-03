@@ -9,7 +9,7 @@ translationQuality: "draft"
 
 Continuing from [Part 1](/translations/web-vitals-improvement-1-en), I want to talk about the next task we undertook to improve web vitals.
 
-### 2. Removing SSG, Switching to SSR
+## 2. Removing SSG, Switching to SSR
 
 The second task was removing all existing SSG (ISR) in our Next.js environment and switching to SSR.
 

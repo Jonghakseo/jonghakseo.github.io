@@ -12,7 +12,7 @@ translationSlug: "web-vitals-improvement-3-en"
 - [1편 - 다국어 동적 로드](/posts/web-vitals-improvement-1)
 - [2편 - SSG 제거, SSR 전환](/posts/web-vitals-improvement-2)
 
-### 3. SWR 적용
+## 3. SWR 적용
 
 먼저 SWR 이란 stale-while-revalidate의 약자로 프론트엔드 생태계에는 vercel에서 만든 동명의 라이브러리가 있다. 참고로 같은 SWR이 맞다.
 

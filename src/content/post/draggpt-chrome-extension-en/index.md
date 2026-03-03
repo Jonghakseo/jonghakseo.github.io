@@ -7,7 +7,7 @@ lang: "en"
 translationQuality: "draft"
 ---
 
-### Background
+## Background
 
 The ChatGPT craze has been intense lately. By bringing generative AI—previously confined to the research domain—closer to the general public, it's giving people the impression that rapid technological advancement has arrived and maybe the singularity(?) is here.
 
@@ -25,7 +25,7 @@ That's why I built and deployed a ChatGPT bot for our internal Slack. The API fo
 
 ![What if we attached this to our error logging middleware for quick summaries?](../draggpt-chrome-extension/img2.png)
 
-### The Spark
+## The Spark
 
 I'd heard that when you assign ChatGPT a role and ask it to behave accordingly, the quality and direction of responses change dramatically. Testing confirmed that "From now on, act as a translator and translate the given text with proper context" produced much better results than a simple "Translate this."
 
@@ -35,7 +35,7 @@ The idea of making a Chrome extension so more people could easily use it from an
 
 Fortunately, I had a boilerplate I'd created for web extension development. Ironically, despite building the boilerplate, I'd never actually published an extension using it until now. I saw this as an opportunity to put it to real use.
 
-### Concept
+## Concept
 
 The concept was simple:
 
@@ -66,9 +66,9 @@ Feedback is always welcome!
 
 https://chrome.google.com/webstore/detail/%EB%93%9C%EB%9E%98%EA%B7%B8-gpt-%EB%93%9C%EB%9E%98%EA%B7%B8%EB%A1%9C-%EC%89%BD%EA%B2%8C-ai%EB%A5%BC-%EC%8B%9C%EC%9E%91%ED%95%B4%EB%B3%B4%EC%84%B8/akgdgnhlglhelinkmnmiakgccdkghjbh
 
-### Development Experience
+## Development Experience
 
-#### Boilerplate
+### Boilerplate
 
 Setting up the boilerplate and getting ChatGPT API requests working was lightning fast. Version 0.1.0 was done in under 4 hours—pretty quick development. Of course, the rapid coding left rough spots everywhere, so I spent time on refactoring and adding tests afterward.
 
@@ -80,7 +80,7 @@ This repo already has over 400 stars and 60+ forks. I'm always grateful to those
 
 https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite
 
-#### XState
+### XState
 
 The content script code was built with React, but the intertwined contexts based on state severely hurt readability. While considering different patterns for cleanup, I decided to try XState—a JS/TS implementation of the Finite State Machine (FSM) pattern commonly used in game development. In short, I was extremely satisfied with it.
 
@@ -96,7 +96,7 @@ This experience also sparked my interest in FSM theory, and I'm jumping the queu
 
 I plan to focus less on dry theory and more on practical usage and separation of concerns when applied to real code.
 
-#### Multi-language Support
+### Multi-language Support
 
 This was my first time implementing multi-language support for a Chrome extension. It wasn't much different from other i18n library approaches, so it was easy to implement. Chrome has built-in extension i18n support (`chrome.i18n`), so no additional dependencies were needed, and the documentation was solid.
 
@@ -108,7 +108,7 @@ What truly shocked me was the translation itself. For 4-language support (Englis
 
 Seeing it effortlessly do what traditional machine translation couldn't was impressive. Watching it precisely extract and translate just the text within HTML left me with... many thoughts.
 
-### Future Plans
+## Future Plans
 
 For now, the goal is to promote the extension and grow the user base.
 

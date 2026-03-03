@@ -11,7 +11,7 @@ translationSlug: "usequery-deep-dive-en"
 
 선언한 graphql 규격에 맞춰, ApolloClient는 어떻게 데이터를 요청할까? 소스코드 흐름을 보며 따라가보자.
 
-### useQuery.ts
+## useQuery.ts
 
 https://github.com/apollographql/apollo-client/blob/v3.11.8/src/react/hooks/useQuery.ts
 
@@ -35,7 +35,7 @@ function _useQuery<
 
 useQuery 훅은 _useQuery 구현체의 wrapper이고, _useQuery 구현체는 useQueryInternals의 반환값에 대한 메모이제이션임을 알 수 있다.
 
-#### useQueryInternals
+### useQueryInternals
 
 ```ts
 export function useQueryInternals<

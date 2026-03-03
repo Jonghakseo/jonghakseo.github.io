@@ -11,7 +11,7 @@ The most commonly used hook when working with Apollo Client is probably useQuery
 
 How does ApolloClient fetch data according to your declared GraphQL specification? Let's trace through the source code to find out.
 
-### useQuery.ts
+## useQuery.ts
 
 https://github.com/apollographql/apollo-client/blob/v3.11.8/src/react/hooks/useQuery.ts
 
@@ -35,7 +35,7 @@ function _useQuery<
 
 We can see that the useQuery hook is a wrapper around the `_useQuery` implementation, which in turn is a memoization of the return value from `useQueryInternals`.
 
-#### useQueryInternals
+### useQueryInternals
 
 ```ts
 export function useQueryInternals<

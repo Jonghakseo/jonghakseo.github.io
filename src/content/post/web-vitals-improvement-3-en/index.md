@@ -12,7 +12,7 @@ Continuing from the previous two parts, I want to talk about the third task we u
 - [Part 1 - Dynamic i18n Loading](/translations/web-vitals-improvement-1-en)
 - [Part 2 - Removing SSG, Switching to SSR](/translations/web-vitals-improvement-2-en)
 
-### 3. Applying SWR
+## 3. Applying SWR
 
 First, SWR stands for stale-while-revalidate. In the frontend ecosystem, there's a well-known library of the same name created by Vercel. And yes, it's the same SWR concept.
 
