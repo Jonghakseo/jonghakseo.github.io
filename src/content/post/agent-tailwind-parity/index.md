@@ -1,9 +1,10 @@
 ---
 title: "LLM 보면서 배워야 하는 시기가 왔다"
-description: "styled-components - Tailwind 마이그레이션을 Fable5과 함께 하며 관찰한 기록."
+description: "styled-components - Tailwind 마이그레이션을 Fable5와 함께 하며 관찰한 기록."
 publishDate: "2026-06-12"
 tags: ["ai", "tailwind", "migration", "Fable5"]
 lang: "ko"
+translationSlug: "agent-tailwind-parity-en"
 ---
 
 styled-components → Tailwind 마이그레이션 검증 체계를 Fable5와 함께 만들었다. 처음에는 아이디어를 얻고 세부 구현을 맡기는 정도로 생각했는데, 진행할수록 에이전트가 문제를 정의하고 검증 방법을 세우는 모습을 보면서 배울 점이 많다는 생각이 들어 기록으로 남긴다.
