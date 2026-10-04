@@ -2,7 +2,7 @@
 
 ## 프로젝트 한눈에 보기
 
-- 정적 블로그 프로젝트(Astro 3 기반)이며, `astro-theme-cactus` 템플릿을 커스터마이징해 사용.
+- 정적 블로그 프로젝트(Astro 4 기반)이며, `astro-theme-cactus` 템플릿을 커스터마이징해 사용.
 - 배포 도메인: `https://jonghakseo.github.io/` (`astro.config.ts`)
 - 핵심 스택: Astro + TypeScript + TailwindCSS + MD/MDX + Content Collections + Pagefind 검색.
 
@@ -43,6 +43,9 @@
 ## 빌드/개발 커맨드
 
 - `pnpm dev`: 로컬 개발 서버
+- `pnpm lint`: ESLint 검사
+- `pnpm check`: Astro 및 TypeScript 타입 검사
+- `pnpm test`: 임시 글로 언어·게시일·수정일 메타를 렌더링해 검사하고 임시 글과 서버를 정리
 - `pnpm build`: 프로덕션 빌드
 - `pnpm postbuild`: Pagefind 인덱싱(`dist` 대상)
 - `pnpm preview`: 빌드 결과 미리보기
@@ -58,4 +61,4 @@
 
 ## 참고
 
-- README는 원본 테마 설명이 많이 남아있어, 실제 동작은 위 파일들을 기준으로 판단하는 것이 정확함.
+- README에 설치·글 작성·번역·배포 방법을 정리해 두었음. 실제 동작은 소스와 설정 파일을 함께 확인할 것.

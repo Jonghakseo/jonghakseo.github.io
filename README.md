@@ -10,6 +10,8 @@
 - [Pagefind](https://pagefind.app/) 정적 검색
 - [Satori](https://github.com/vercel/satori) 기반 OG 이미지 자동 생성
 
+`@astrojs/sitemap`은 Astro 4와 호환되는 `3.2.1`로 고정합니다. 최신 3.x는 이 프로젝트의 Astro 버전에 없는 라우트 훅을 사용하므로 Astro 업그레이드와 함께 검토해야 합니다.
+
 ## Commands
 
 패키지 매니저는 `pnpm`(`packageManager` 필드에 고정), Node 버전은 `.nvmrc` 기준입니다.
@@ -22,6 +24,8 @@
 | `pnpm postbuild` | Pagefind 검색 인덱스 생성 (build 후 자동) |
 | `pnpm preview`   | 빌드 결과 로컬 미리보기                   |
 | `pnpm lint`      | ESLint 검사                               |
+| `pnpm check`     | Astro 및 TypeScript 타입 검사             |
+| `pnpm test`      | 글 언어·게시일·수정일 메타 렌더링 검사    |
 | `pnpm format`    | Prettier 포맷                             |
 
 ## Structure
@@ -63,10 +67,11 @@ public/             # 정적 자산 (favicon, fonts, resume 등)
 - 원문(예: `my-post`)에 `translationSlug: "my-post-en"`을 지정
 - 번역본(`my-post-en`)은 `lang`과 `translationQuality`만 지정하고 `translationSlug`는 비워둠
 - 번역본은 목록·RSS·사이트맵에서 제외되고 `/translations/<slug>/`로만 빌드됨
+- 글의 HTML 언어와 OG locale은 `lang`을 따름. 검색은 `--force-language en`으로 통합 인덱스를 생성해 현재 페이지 언어와 관계없이 모든 원문을 검색함
 
 ## Deploy
 
-`main`에 push하면 `.github/workflows/deploy.yml`이 사이트를 빌드해 GitHub Pages로 배포합니다.
+`.github/workflows/deploy.yml`이 PR과 `main` push에서 린트·타입 검사·메타 렌더링 테스트·프로덕션 빌드를 실행합니다. PR에서는 배포하지 않으며, `main` push 또는 수동 실행에서만 GitHub Pages로 배포합니다.
 
 ## Credit
 

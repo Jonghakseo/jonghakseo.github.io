@@ -15,7 +15,9 @@ const {
 	slug,
 } = post;
 const socialImage = ogImage ?? `/og-image/${slug}.png`;
-const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
+const articleDate = publishDate.toISOString();
+const articleModifiedDate = updatedDate?.toISOString();
+const ogLocale = lang === "ko" ? "ko_KR" : "en_GB";
 const { headings } = await post.render();
 
 const hasTranslation = !!translationSlug;
@@ -190,6 +192,10 @@ const targetLang = lang === "ko" ? "en" : "ko";
 
 			postContent.innerHTML = html;
 			isShowingTranslation = true;
+			document.documentElement.lang = targetLang;
+			document
+				.querySelector('meta[property="og:locale"]')
+				?.setAttribute("content", targetLang === "ko" ? "ko_KR" : "en_GB");
 			toggleBtn!.textContent = labelTranslation;
 			toggleBtn!.disabled = false;
 
@@ -228,6 +234,10 @@ const targetLang = lang === "ko" ? "en" : "ko";
 			showQualityBanner(false);
 			postContent.innerHTML = originalContent;
 			isShowingTranslation = false;
+			document.documentElement.lang = currentLang;
+			document
+				.querySelector('meta[property="og:locale"]')
+				?.setAttribute("content", currentLang === "ko" ? "ko_KR" : "en_GB");
 			toggleBtn!.textContent = labelOriginal;
 
 			// Restore title in hero
@@ -274,7 +284,17 @@ const targetLang = lang === "ko" ? "en" : "ko";
 	document.addEventListener("astro:after-swap", initLangToggle);
 </script>
 
-<BaseLayout meta={{ title, description, articleDate, ogImage: socialImage }}>
+<BaseLayout
+	meta={{
+		title,
+		description,
+		articleDate,
+		articleModifiedDate,
+		lang,
+		ogLocale,
+		ogImage: socialImage,
+	}}
+>
 	<div class="gap-x-10 lg:flex lg:items-start">
 		{!!headings.length && <TOC headings={headings} />}
 		<article class="flex-grow break-words" data-pagefind-body>

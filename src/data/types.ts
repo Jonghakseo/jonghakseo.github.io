@@ -21,4 +21,7 @@ export type SiteMeta = {
 	description?: string;
 	ogImage?: string | undefined;
 	articleDate?: string | undefined;
+	articleModifiedDate?: string | undefined;
+	lang?: string | undefined;
+	ogLocale?: string | undefined;
 };

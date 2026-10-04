@@ -8,12 +8,12 @@ import a11y from "eslint-plugin-jsx-a11y";
 
 export default [
 	{
-		ignores: ["node_modules", "dist", ".astro"],
+		ignores: ["node_modules", "dist", ".astro", ".github", ".changeset"],
 	},
 	{
 		files: ["**/*.{js,mjs,cjs,ts}"],
 		languageOptions: {
-			globals: globals.node,
+			globals: { ...globals.node, ...globals.browser },
 		},
 	},
 	js.configs.recommended,
@@ -23,6 +23,7 @@ export default [
 		files: ["**/*.astro"],
 		languageOptions: {
 			parser: astroParser,
+			globals: { ...globals.node, ...globals.browser },
 			parserOptions: {
 				parser: tseslint.parser,
 				sourceType: "module",

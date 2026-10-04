@@ -5,9 +5,9 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 import remarkUnwrapImages from "remark-unwrap-images";
-// @ts-ignore:next-line
 import { remarkReadingTime } from "./src/utils/remark-reading-time.mjs";
 import { visit } from "unist-util-visit";
+import type { Root } from "hast";
 
 // https://astro.build/config
 export default defineConfig({
@@ -44,8 +44,7 @@ export default defineConfig({
 function rawFonts(ext: Array<string>) {
 	return {
 		name: "vite-plugin-raw-fonts",
-		// @ts-ignore:next-line
-		transform(_, id) {
+		transform(_: string, id: string) {
 			if (ext.some((e) => id.endsWith(e))) {
 				const buffer = fs.readFileSync(id);
 				return {
@@ -53,13 +52,14 @@ function rawFonts(ext: Array<string>) {
 					map: null,
 				};
 			}
+			return null;
 		},
 	};
 }
 
 // Rehype plugin to add loading="lazy" and decoding="async" to all img elements
 function rehypeImageOptimization() {
-	return (tree: any) => {
+	return (tree: Root) => {
 		visit(tree, "element", (node) => {
 			if (node.tagName === "img") {
 				if (!node.properties.loading) {

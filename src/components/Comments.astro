@@ -10,8 +10,8 @@
 
 	loadUtterancesScript(initialIsDark);
 
-	function loadUtterancesScript(isDark) {
-		document.querySelector(".utterances").remove();
+	function loadUtterancesScript(isDark: boolean) {
+		document.querySelector(".utterances")?.remove();
 
 		const script = document.createElement("script");
 		script.src = "https://utteranc.es/client.js";
@@ -26,5 +26,5 @@
 </script>
 
 <div class="utterances">
-	<iframe class="utterances-frame"></iframe>
+	<iframe class="utterances-frame" title="Comments"></iframe>
 </div>
