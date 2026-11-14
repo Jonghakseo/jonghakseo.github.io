@@ -4,6 +4,7 @@ description: "쿼리 허용 목록, 403 중단 문구, 가짜 응답. LLM 공격
 publishDate: "2026-11-13"
 tags: ["ai", "security", "graphql", "agent"]
 lang: "ko"
+translationSlug: "defending-against-llm-attacks-en"
 ---
 
 ## 대공격의 시대
