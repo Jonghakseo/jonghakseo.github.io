@@ -1,6 +1,6 @@
 ---
 title: "LLM 기반의 공격 방어를 위해 시도해본 것들"
-description: "막는 대신 가짜 응답을 주는 디코이, 그리고 '하지 마'라고 말하는 표지판. LLM 공격 에이전트를 상대로 시도한 두 가지 방어를 634개 공격 세션으로 측정한 결과."
+description: "LLM 공격 에이전트를 막아보려고 시도해본 두 가지 방법과 실험 기록."
 publishDate: "2026-11-13"
 tags: ["ai", "security", "graphql", "agent"]
 lang: "ko"
