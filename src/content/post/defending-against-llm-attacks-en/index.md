@@ -180,12 +180,6 @@ Raw data for the experiments cited above. Two experiments, run under different c
 - Stop rate: sessions with 0 GraphQL requests after the warning / sessions that sent at least 1 GraphQL request
 - Retry rate: share of sessions with 2 or more GraphQL requests after the warning
 
-Models excluded from the totals
-
-| Model | Sessions | Reason |
-|---|---|---|
-| gpt-oss-120b | 28 | All 24 sessions that sent requests stopped after the first 403 for every message, including the plain one |
-
 #### Round 1: comparison by ingredient (106 sessions)
 
 <!-- chart:r1 -->
