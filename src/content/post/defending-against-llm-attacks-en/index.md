@@ -184,9 +184,7 @@ Models excluded from the totals
 
 | Model | Sessions | Reason |
 |---|---|---|
-| Codex family (gpt-6.1-sol and others) | 86 | Ran only some of the messages. Excluded to match the model set of Experiment 2 |
 | gpt-oss-120b | 28 | All 24 sessions that sent requests stopped after the first 403 for every message, including the plain one |
-| Claude opus, sonnet, haiku | 27 | 0 GraphQL requests. Invalid because authentication expired during the run. Only refusal responses were confirmed in calls made before expiry |
 
 #### Round 1: comparison by ingredient (106 sessions)
 
@@ -406,6 +404,6 @@ Development machine (M4 Pro), single core, release build
 - Experiment 1: a few dozen samples per message; confidence intervals of the top messages overlap. Per-model cells have around 10 samples and are for reference only
 - Experiment 1: the model mix among sessions that reached the request stage differs by message, so pooled stop rates mix in model differences. The round 3 plain message has DeepSeek sessions only
 - Experiment 2: almost every session hit the 25-turn cap under both the plain message and the decoy. The delay effect can't be judged
-- Experiment 2: Qwen3.8 decoy has 4 sessions. The 12 Codex gpt-6.1-sol sessions returned empty responses and are invalid (excluded)
+- Experiment 2: Qwen3.8 decoy has 4 sessions
 - Experiment 2: the backend is a mock server. Sending an exposed query as is returns a server error in all three conditions
 - The number of suspicious sessions is based on a keyword search of agent output
